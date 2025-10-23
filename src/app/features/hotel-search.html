@@ -1,0 +1,94 @@
+<div class="hotel-search-container">
+  <div class="max-w-6xl mx-auto px-4">
+    
+    <!-- Header -->
+    <div class="search-header">
+      <h1 class="search-title">🏨 Hotel finder</h1>
+    </div>
+
+    <!-- Search Card -->
+    <div class="search-card">
+      <div class="search-input-group">
+        <label for="cityCode" class="input-label">
+          Şehir Kodu (IATA Kodu)
+        </label>
+        <input
+          id="cityCode"
+          type="text"
+          [(ngModel)]="cityCode"
+          placeholder="Örnek: PAR, LON, NYC, IST"
+          class="city-input"
+          maxlength="3"
+        >
+        <p class="input-hint">
+          IATA şehir kodunu girin (3 harf). Örnekler: PAR, LON, NYC, IST, BER
+        </p>
+      </div>
+
+      <button 
+        (click)="searchHotels()"
+        [disabled]="isLoading || !cityCode"
+        class="search-btn">
+        {{ isLoading ? '🔄 Oteller Aranıyor...' : '🔍 Otelleri Ara' }}
+      </button>
+    </div>
+
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="loading-container">
+      <div class="loading-spinner"></div>
+      <p class="loading-text">{{ cityCode }} şehrinde lüks oteller aranıyor...</p>
+    </div>
+
+    <!-- Error State -->
+    <div *ngIf="error && !isLoading" class="error-container">
+      <h4 class="error-title">⚠️ Hata</h4>
+      <p class="error-message">{{ error }}</p>
+    </div>
+
+    <!-- Results -->
+    <div *ngIf="!isLoading && hotels.length > 0" class="results-container">
+      <h3 class="results-title">
+        {{ cityCode }} Şehrinde Bulunan Oteller
+        <span class="results-count">{{ hotels.length }}</span>
+      </h3>
+      
+      <div class="hotels-grid">
+        <div *ngFor="let h of hotels; let i = index" class="hotel-card">
+          <h3 class="hotel-name">{{ i + 1 }}. {{ h.name }}</h3>
+          
+          <div class="hotel-details">
+            <div class="detail-item">
+              <span class="detail-label">🏷️ Otel ID:</span>
+              <span class="detail-value">{{ h.hotelId }}</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">🔗 Dupe ID:</span>
+              <span class="detail-value">{{ h.dupeId || 'Yok' }}</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">🏢 Zincir:</span>
+              <span class="detail-value">{{ h.chainCode || 'Yok' }}</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">🏙️ Şehir:</span>
+              <span class="detail-value">{{ h.cityCode || 'Yok' }}</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">📍 Enlem:</span>
+              <span class="detail-value">{{ h.latitude || 'Yok' }}</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">📍 Boylam:</span>
+              <span class="detail-value">{{ h.longitude || 'Yok' }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="!isLoading && hotels.length === 0 && !error && cityCode" class="empty-state">
+      <p class="empty-text">🎯 {{ cityCode }} şehrinde otel bulunamadı. Başka bir şehir kodu deneyin.</p>
+    </div>
+  </div>
+</div>

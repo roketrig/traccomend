@@ -1,0 +1,20 @@
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-flight-search',
+  standalone: true,
+  imports: [CommonModule],
+  template: `
+    <div class="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6">✈️ Flight Offers</h2>
+      <p class="text-gray-600">Uçuş arama formu buraya gelecek...</p>
+      
+      <div class="mt-4 p-4 bg-blue-50 rounded">
+        <h3 class="font-semibold">Test için:</h3>
+        <p>Bu flight search component'i</p>
+      </div>
+    </div>
+  `
+})
+export class FlightSearch { }
