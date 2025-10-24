@@ -1,64 +1,56 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'; // ← FormsModule ekle
+import { FormsModule } from '@angular/forms';
 import { TravelHotelSearch } from '../../services/travel-hotel-search/travel-hotel-search';
 import { switchMap } from 'rxjs/operators';
+import { SearchService } from '../../shared/search';
 
 @Component({
   selector: 'app-hotel-search',
   standalone: true,
-  imports: [CommonModule, FormsModule], // ← FormsModule ekle
+  imports: [CommonModule, FormsModule],
   templateUrl: './hotel-search.html',
   styleUrls: ['./hotel-search.css']
 })
-export class HotelSearch {
+export class HotelSearch implements OnInit {
   hotels: any[] = [];
   isLoading = false;
   error = '';
-  cityCode = 'PAR'; // ← Varsayılan değer
+  cityCode = '';
 
-  constructor(private hotelService: TravelHotelSearch) {}
+  constructor(
+    private hotelService: TravelHotelSearch,
+    private searchService: SearchService
+  ) {}
 
-  searchHotels() {
-    if (!this.cityCode || this.cityCode.length !== 3) {
-      this.error = 'Lütfen geçerli bir 3 harfli şehir kodu girin (Örnek: PAR, LON)';
-      return;
-    }
+  ngOnInit() {
+    this.searchService.cityCode$.subscribe(code => {
+      if (code && code.length === 3) {
+        this.searchHotels(code);
+      }
+    });
+  }
 
+  searchHotels(cityCode: string) {
+    this.cityCode = cityCode.toUpperCase();
     this.isLoading = true;
     this.error = '';
     this.hotels = [];
 
-    // Büyük harfe çevir
-    const city = this.cityCode.toUpperCase();
-
-    this.hotelService.getHotelIds(city).pipe(
+    this.hotelService.getHotelIds(this.cityCode).pipe(
       switchMap((hotelIds: string[]) => {
-        console.log('Hotel IDs for', city, ':', hotelIds);
-        
         if (hotelIds.length === 0) {
-          throw new Error(`${city} şehrinde otel bulunamadı`);
+          throw new Error(`${this.cityCode} No hotels found in the city`);
         }
-
-        console.log('Searching offers for hotel IDs:', hotelIds);
         return this.hotelService.searchHotelOffers(hotelIds);
       })
     ).subscribe({
       next: (res: any) => {
-        console.log('Full API Response:', res);
-        
         const raw = res.data ?? [];
-        
-        if (raw.length) {
-          console.log("First hotel raw item:", raw[0]);
-        }
-
-        // Hotel bilgilerini işle
         this.hotels = raw.map((item: any) => {
           const h = item.hotel ?? item;
-
           return {
-            name: h.name ?? 'Bilinmeyen Otel',
+            name: h.name ?? 'unknown Hotel',
             hotelId: h.hotelId ?? h.id ?? 'N/A',
             dupeId: item.dupeId ?? h.dupeId ?? null,
             chainCode: h.chainCode ?? item.chainCode ?? null,
@@ -68,13 +60,11 @@ export class HotelSearch {
             type: item.type || 'hotel'
           };
         });
-
         this.isLoading = false;
       },
       error: (err) => {
-        console.error('Hotel API Error:', err);
         this.isLoading = false;
-        this.error = err.message || 'Oteller aranırken bir hata oluştu';
+        this.error = err.message || 'An error occurred while searching for hotels';
       }
     });
   }
