@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, switchMap } from 'rxjs';
-import { AuthService } from './auth';
+import { AuthService } from '../auth/auth';
 
 @Injectable({
   providedIn: 'root'

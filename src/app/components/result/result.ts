@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TravelRecommendations } from '../services/travel-recommendations';
+import { TravelRecommendations } from '../../services/travel-recommendations/travel-recommendations';
 
 @Component({
   selector: 'app-result',

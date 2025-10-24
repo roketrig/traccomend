@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; // ← FormsModule ekle
-import { TravelHotelSearch } from '../services/travel-hotel-search';
+import { TravelHotelSearch } from '../../services/travel-hotel-search/travel-hotel-search';
 import { switchMap } from 'rxjs/operators';
 
 @Component({
