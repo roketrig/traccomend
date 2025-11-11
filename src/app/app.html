@@ -3,7 +3,7 @@
     <a class="text-white font-bold text-xl mx-auto" href="">Traccomend</a>
   </nav>
 
-  <header class="text-white p-4 shadow-md">
+  <header class=" p-4 shadow-md">
     <div class="container mx-auto flex justify-between items-center">
       <!-- Tabs-->
       <mat-tab-group [selectedIndex]="selectedTabIndex" (selectedIndexChange)="onTabChange($event)">
@@ -12,7 +12,7 @@
         <mat-tab label="HOTELS"></mat-tab>
       </mat-tab-group>
 
-<app-search-bar (actionTriggered)="handleSearch($event)"></app-search-bar>
+      <app-search-bar (actionTriggered)="handleSearch($event)"></app-search-bar>
     </div>
   </header>
 
