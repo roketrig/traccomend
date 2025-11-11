@@ -27,14 +27,10 @@ export class Result implements OnInit {
       const city = parsedData?.location?.name ?? '';
       const country = parsedData?.travellerCountry?.name ?? parsedData?.travellerCountry ?? 'FR';
 
-      console.log('Şehir:', city);
-      console.log('Ülke:', country);
-
       if (city && country) {
         this.travelService.getRecommendations(city.slice(0, 3).toUpperCase(), country.toUpperCase()).subscribe({
           next: (data) => {
             this.recommendations = data.data;
-            console.log(this.recommendations);
           },
           error: (err) => {
             console.error('API hatası:', err);

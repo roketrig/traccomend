@@ -1,9 +1,14 @@
 <div class="hotel-search-container">
   <div class="max-w-6xl mx-auto px-4">
-    
+
     <!-- Header -->
     <div class="search-header">
       <h1 class="search-title">🏨 Hotel finder</h1>
+      <!--Hotel Button-->
+      <button
+        class="bg-white text-blue-600 font-semibold px-4 py-2 rounded shadow hover:bg-blue-100 transition search-btn">
+        {{ isLoading ? '🔄 Processing...' : '🔍 Search Hotel Offers' }}
+      </button>
     </div>
 
 
@@ -26,39 +31,39 @@
         {{ cityCode }} City Hotels Found
         <span class="results-count">{{ hotels.length }}</span>
       </h3>
-      
-<div class="hotels-grid">
-  <div *ngFor="let h of hotels.slice(0, 12); let i = index" class="hotel-card">
-    <h3 class="hotel-name">{{ i + 1 }}. {{ h.name }}</h3>
 
-    <div class="hotel-details">
-      <div class="detail-item">
-        <span class="detail-label">🏷️ Hotel ID:</span>
-        <span class="detail-value">{{ h.hotelId }}</span>
+      <div class="hotels-grid">
+        <div *ngFor="let h of hotels.slice(0, 12); let i = index" class="hotel-card">
+          <h3 class="hotel-name">{{ i + 1 }}. {{ h.name }}</h3>
+
+          <div class="hotel-details">
+            <div class="detail-item">
+              <span class="detail-label">🏷️ Hotel ID:</span>
+              <span class="detail-value">{{ h.hotelId }}</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">🔗 Dupe ID:</span>
+              <span class="detail-value">{{ h.dupeId || 'N/A' }}</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">🏢 Chain:</span>
+              <span class="detail-value">{{ h.chainCode || 'N/A' }}</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">🏙️ City:</span>
+              <span class="detail-value">{{ h.cityCode || 'N/A' }}</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">📍 Latitude:</span>
+              <span class="detail-value">{{ h.latitude || 'N/A' }}</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">📍 Longitude:</span>
+              <span class="detail-value">{{ h.longitude || 'N/A' }}</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="detail-item">
-        <span class="detail-label">🔗 Dupe ID:</span>
-        <span class="detail-value">{{ h.dupeId || 'N/A' }}</span>
-      </div>
-      <div class="detail-item">
-        <span class="detail-label">🏢 Chain:</span>
-        <span class="detail-value">{{ h.chainCode || 'N/A' }}</span>
-      </div>
-      <div class="detail-item">
-        <span class="detail-label">🏙️ City:</span>
-        <span class="detail-value">{{ h.cityCode || 'N/A' }}</span>
-      </div>
-      <div class="detail-item">
-        <span class="detail-label">📍 Latitude:</span>
-        <span class="detail-value">{{ h.latitude || 'N/A' }}</span>
-      </div>
-      <div class="detail-item">
-        <span class="detail-label">📍 Longitude:</span>
-        <span class="detail-value">{{ h.longitude || 'N/A' }}</span>
-      </div>
-    </div>
-  </div>
-</div>
     </div>
 
     <!-- Empty State -->

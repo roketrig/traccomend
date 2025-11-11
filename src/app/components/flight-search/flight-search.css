@@ -16,7 +16,7 @@
   font-weight: 800;
   color: white;
   margin-bottom: 0.5rem;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .search-subtitle {
@@ -30,10 +30,10 @@
   background: white;
   border-radius: 20px;
   padding: 2.5rem;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
   margin-bottom: 2rem;
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .search-input-group {
@@ -82,7 +82,7 @@
 .search-btn {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  padding: 1rem 2.5rem;
+  padding: 1rem 2rem;
   border: none;
   border-radius: 12px;
   font-size: 1.1rem;
@@ -90,6 +90,8 @@
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  display: inline-block;
+  /* Ortalanabilmesi için */
 }
 
 .search-btn:hover:not(:disabled) {
@@ -110,7 +112,7 @@
   border-radius: 20px;
   padding: 3rem;
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .loading-spinner {
@@ -124,8 +126,13 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .loading-text {
@@ -160,7 +167,7 @@
   background: white;
   border-radius: 20px;
   padding: 2rem;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .results-title {
@@ -211,7 +218,7 @@
 
 .hotel-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
   border-color: #667eea;
 }
 
@@ -254,7 +261,7 @@
   border-radius: 20px;
   padding: 3rem;
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .empty-text {
@@ -268,16 +275,16 @@
   .search-title {
     font-size: 2rem;
   }
-  
+
   .search-card {
     padding: 1.5rem;
     margin: 0 1rem;
   }
-  
+
   .hotels-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .hotel-card {
     margin: 0 0.5rem;
   }

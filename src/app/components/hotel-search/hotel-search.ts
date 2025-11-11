@@ -38,8 +38,6 @@ export class HotelSearch implements OnInit {
 
     this.hotelService.searchHotelsByCity(this.cityCode).subscribe({
       next: (res: any) => {
-        console.log('Hotel API response:', res);
-
         const raw = res.data ?? [];
         this.hotels = raw.map((item: any) => ({
           name: item.name ?? 'Unknown Hotel',
@@ -51,14 +49,11 @@ export class HotelSearch implements OnInit {
           longitude: item.geoCode?.longitude ?? null,
           type: item.type || 'hotel'
         }));
-
-        console.log('Parsed hotels:', this.hotels);
         this.isLoading = false;
       },
       error: (err: { message: string; }) => {
         this.isLoading = false;
         this.error = err.message || 'An error occurred while searching for hotels';
-        console.error('Hotel search error:', err);
       }
     });
   }

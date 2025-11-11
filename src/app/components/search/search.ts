@@ -36,7 +36,7 @@ export class Search implements OnInit {
 
     this.cityService.getCity('istanbul').subscribe({
       next: res => console.log(res),
-      error: err => console.error('API hatası:', err)
+      error: err => console.error(err)
     });
 
     this.filteredCities = this.cityControl.valueChanges.pipe(

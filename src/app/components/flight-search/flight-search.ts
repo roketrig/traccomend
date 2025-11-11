@@ -1,27 +1,28 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'; // ngModel için gerekli
+import { FormsModule } from '@angular/forms';
 import { FlightOffers } from '../../services/flight-offers/flight-offers';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-flight-search',
   standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './flight-search.html'
+  imports: [CommonModule, FormsModule, MatFormFieldModule, MatInputModule],
+  templateUrl: './flight-search.html',
+  styleUrl: './flight-search.css'
 })
 export class FlightSearch {
-  // Form alanları
   originLocationCode = '';
   destinationLocationCode = '';
   departureDate = '';
   adults = 1;
 
-  // API sonuçları
   flightOffers: any[] = [];
   isLoading = false;
   error = '';
 
-  constructor(private flightService: FlightOffers) {}
+  constructor(private flightService: FlightOffers) { }
 
   searchFlights() {
     this.isLoading = true;
