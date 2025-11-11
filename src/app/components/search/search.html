@@ -1,0 +1,44 @@
+<form class="travel-form-container space-y-6 search-section" (submit)="onSubmit($event)">
+  <mat-form-field appearance="fill" class="w-full">
+    <mat-label>Please Select a City</mat-label>
+    <input type="text" matInput [formControl]="cityControl" [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onCitySelected($event.option.value)">
+      <mat-option *ngFor="let city of filteredCities | async" [value]="city">
+        {{ city }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <div *ngIf="selectedCityAirports.length > 0">
+    <h3>IATA Codes:</h3>
+    <ul class="iata-list">
+      <li *ngFor="let airport of selectedCityAirports">
+        {{ airport.name }} – {{ airport.iata_code }}
+      </li>
+    </ul>
+  </div>
+
+  <div>
+    <label class="travel-form-label">Start Point</label>
+    <input type="text" [(ngModel)]="selectedCity" name="selectedCity" class="travel-form-input" placeholder="city name.." required />
+  </div>
+
+  <div>
+    <label class="travel-form-label">Where are you from?</label>
+    <input type="text" [(ngModel)]="selectedCountry" name="selectedCountry" class="travel-form-input" placeholder="Where are you from?" required />
+  </div>
+
+  <div>
+    <label class="travel-form-label">Travel Duration (days)</label>
+    <input type="number" [(ngModel)]="duration" name="duration" class="travel-form-input" placeholder="E.g.: 7" required />
+  </div>
+
+  <div>
+    <label class="travel-form-label">Budget (₺)</label>
+    <input type="number" [(ngModel)]="budget" name="budget" class="travel-form-input" placeholder="Optional" />
+  </div>
+
+  <button type="submit" class="travel-form-submit">
+    Search Route
+  </button>
+</form>

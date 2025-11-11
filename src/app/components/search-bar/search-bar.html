@@ -1,0 +1,18 @@
+<div class="flex items-center gap-4">
+  <mat-form-field appearance="outline" class="w-[24rem]">
+    <mat-label>Search</mat-label>
+    <input
+      matInput
+      placeholder="Search destinations..."
+      [(ngModel)]="cityCode"
+    />
+  </mat-form-field>
+
+  <button
+    (click)="triggerAction()"
+    [disabled]="isLoading || !cityCode"
+    class="bg-white text-blue-600 font-semibold px-4 py-2 rounded shadow hover:bg-blue-100 transition"
+  >
+    {{ isLoading ? '🔄 Processing...' : '🔍 Search Hotels' }}
+  </button>
+</div>

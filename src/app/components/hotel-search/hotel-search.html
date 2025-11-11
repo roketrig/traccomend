@@ -1,0 +1,69 @@
+<div class="hotel-search-container">
+  <div class="max-w-6xl mx-auto px-4">
+    
+    <!-- Header -->
+    <div class="search-header">
+      <h1 class="search-title">🏨 Hotel finder</h1>
+    </div>
+
+
+
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="loading-container">
+      <div class="loading-spinner"></div>
+      <p class="loading-text">{{ cityCode }} Luxury hotels are being sought in the city...</p>
+    </div>
+
+    <!-- Error State -->
+    <div *ngIf="error && !isLoading" class="error-container">
+      <h4 class="error-title">⚠️ Error</h4>
+      <p class="error-message">{{ error }}</p>
+    </div>
+
+    <!-- Results -->
+    <div *ngIf="!isLoading && hotels.length > 10" class="results-container">
+      <h3 class="results-title">
+        {{ cityCode }} City Hotels Found
+        <span class="results-count">{{ hotels.length }}</span>
+      </h3>
+      
+<div class="hotels-grid">
+  <div *ngFor="let h of hotels.slice(0, 10); let i = index" class="hotel-card">
+    <h3 class="hotel-name">{{ i + 1 }}. {{ h.name }}</h3>
+
+    <div class="hotel-details">
+      <div class="detail-item">
+        <span class="detail-label">🏷️ Hotel ID:</span>
+        <span class="detail-value">{{ h.hotelId }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">🔗 Dupe ID:</span>
+        <span class="detail-value">{{ h.dupeId || 'N/A' }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">🏢 Chain:</span>
+        <span class="detail-value">{{ h.chainCode || 'N/A' }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">🏙️ City:</span>
+        <span class="detail-value">{{ h.cityCode || 'N/A' }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">📍 Latitude:</span>
+        <span class="detail-value">{{ h.latitude || 'N/A' }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">📍 Longitude:</span>
+        <span class="detail-value">{{ h.longitude || 'N/A' }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="!isLoading && hotels.length === 0 && !error && cityCode" class="empty-state">
+      <p class="empty-text">🎯 {{ cityCode }} city hotels found. Try another city code.</p>
+    </div>
+  </div>
+</div>
