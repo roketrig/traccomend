@@ -1,5 +1,71 @@
-<div class="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
-    <h2 class="text-2xl font-bold text-gray-800 mb-6">✈️ Flight Offers</h2>
- 
+<div class="hotel-search-container">
+  <div class="search-header">
+    <h1 class="search-title">✈️ Flight Offers</h1>
+    <p class="search-subtitle">Find the best flights for your journey</p>
+  </div>
+
+  <div *ngIf="error" class="error-container">
+    <h3 class="error-title">Error</h3>
+    <p class="error-message">{{ error }}</p>
+  </div>
+
+  <div class="search-card">
+    <div class="search-input-group">
+      <label class="input-label">Origin Airport Code</label>
+      <input type="text" class="city-input" placeholder="e.g. IST" [(ngModel)]="originLocationCode" />
+      <p class="input-hint">Enter IATA code (e.g., IST for Istanbul)</p>
+    </div>
+
+    <div class="search-input-group">
+      <label class="input-label">Destination Airport Code</label>
+      <input type="text" class="city-input" placeholder="e.g. LHR" [(ngModel)]="destinationLocationCode" />
+    </div>
+
+    <div class="search-input-group">
+      <label class="input-label">Departure Date</label>
+      <input type="date" class="city-input" [(ngModel)]="departureDate" />
+    </div>
+
+    <div class="search-input-group">
+      <label class="input-label">Adults</label>
+      <input type="number" class="city-input" [(ngModel)]="adults" min="1" />
+    </div>
+  </div>
+
+  <div *ngIf="isLoading" class="loading-container">
+    <div class="loading-spinner"></div>
+    <p class="loading-text">Searching flight offers...</p>
+  </div>
   
+  <div *ngIf="!isLoading && flightOffers.length > 0" class="results-container">
+    <h2 class="results-title">
+      Available Flight Offers
+      <span class="results-count">{{ flightOffers.length }}</span>
+    </h2>
+
+    <div class="hotels-grid">
+      <div *ngFor="let offer of flightOffers" class="hotel-card">
+        <h3 class="hotel-name">{{ offer.itineraries[0]?.segments[0]?.carrierCode }} {{ offer.itineraries[0]?.segments[0]?.number }}</h3>
+        <div class="hotel-details">
+          <div class="detail-item">
+            <span class="detail-label">Origin</span>
+            <span class="detail-value">{{ offer.itineraries[0]?.segments[0]?.departure?.iataCode }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Destination</span>
+            <span class="detail-value">{{ offer.itineraries[0]?.segments[0]?.arrival?.iataCode }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Price</span>
+            <span class="detail-value">{{ offer.price?.total }} {{ offer.price?.currency }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="!isLoading && flightOffers.length === 0 && !error" class="empty-state">
+    <p class="empty-text">No flight offers found for the given criteria.</p>
+  </div>
 </div>

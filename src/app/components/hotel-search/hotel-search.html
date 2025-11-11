@@ -21,14 +21,14 @@
     </div>
 
     <!-- Results -->
-    <div *ngIf="!isLoading && hotels.length > 10" class="results-container">
+    <div *ngIf="!isLoading && hotels.length > 12" class="results-container">
       <h3 class="results-title">
         {{ cityCode }} City Hotels Found
         <span class="results-count">{{ hotels.length }}</span>
       </h3>
       
 <div class="hotels-grid">
-  <div *ngFor="let h of hotels.slice(0, 10); let i = index" class="hotel-card">
+  <div *ngFor="let h of hotels.slice(0, 12); let i = index" class="hotel-card">
     <h3 class="hotel-name">{{ i + 1 }}. {{ h.name }}</h3>
 
     <div class="hotel-details">

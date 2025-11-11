@@ -10,20 +10,27 @@ export class FlightOffers {
   private http = inject(HttpClient);
   private authService = inject(AuthService);
 
-searchFlightStatus(carrierCode: string, flightNumber: string, departureDate: string): Observable<any> {
-  return this.authService.getAccessToken().pipe(
-    switchMap(token => {
-      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-      const params = new HttpParams()
-        .set('carrierCode', carrierCode)
-        .set('flightNumber', flightNumber)
-        .set('scheduledDepartureDate', departureDate);
+  searchFlightOffers(originLocationCode: string, destinationLocationCode: string, departureDate: string, adults: number): Observable<any> {
+    return this.authService.getAccessToken().pipe(
+      switchMap(token => {
+
+        const headers = new HttpHeaders()
+          .set('Authorization', `Bearer ${token}`)
+          .set('Content-Type', 'application/json');
 
 
-        const url = 'https://test.api.amadeus.com/v2/schedule/flights';
+        const params = new HttpParams()
+          .set('originLocationCode', originLocationCode)
+          .set('destinationLocationCode', destinationLocationCode)
+          .set('departureDate', departureDate)
+          .set('adults', adults.toString())
+          .set('currencyCode', 'USD')
+          .set('max', '5');
+
+        const url = 'https://test.api.amadeus.com/v2/shopping/flight-offers';
         return this.http.get(url, { headers, params });
 
-    })
-  );
-}
+      })
+    );
+  }
 }
