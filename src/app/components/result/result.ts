@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TravelRecommendations } from '../../services/travel-recommendations/travel-recommendations';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-result',
@@ -9,10 +10,10 @@ import { TravelRecommendations } from '../../services/travel-recommendations/tra
   templateUrl: './result.html',
   styleUrls: ['./result.css']
 })
-export class Result implements OnInit {
+export class ResultComponent implements OnInit {
   recommendations: any[] = [];
 
-  constructor(private travelService: TravelRecommendations) { }
+  constructor(private travelService: TravelRecommendations, private router: Router) { }
 
   ngOnInit(): void {
     this.fetchRecommendations();
@@ -23,14 +24,13 @@ export class Result implements OnInit {
 
     if (storedData) {
       const parsedData = JSON.parse(storedData);
-
-      const city = parsedData?.location?.name ?? '';
-      const country = parsedData?.travellerCountry?.name ?? parsedData?.travellerCountry ?? 'FR';
+      const city = parsedData.target_city;
+      const country = parsedData.origin_country_code;
 
       if (city && country) {
         this.travelService.getRecommendations(city.slice(0, 3).toUpperCase(), country.toUpperCase()).subscribe({
           next: (data) => {
-            this.recommendations = data.data;
+            this.recommendations = data.data; // API response formatına göre
           },
           error: (err) => {
             console.error('API hatası:', err);
@@ -41,4 +41,9 @@ export class Result implements OnInit {
       }
     }
   }
+
+  goBack(): void {
+    this.router.navigate(['/search']); // Arama sayfasının route'u
+  }
+
 }

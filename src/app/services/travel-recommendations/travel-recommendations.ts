@@ -32,28 +32,4 @@ export class TravelRecommendations {
       })
     );
   }
-
-  // Flight offers için method
-  getFlightOffers(origin: string, destination: string, departureDate: string): Observable<any> {
-    return this.authService.ensureToken().pipe(
-      switchMap(token => {
-        const headers = new HttpHeaders({
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        });
-
-        const params = new HttpParams()
-          .set('originLocationCode', origin)
-          .set('destinationLocationCode', destination)
-          .set('departureDate', departureDate)
-          .set('adults', '1')
-          .set('max', '5');
-
-        return this.http.get(`${this.baseUrl}/shopping/flight-offers`, {
-          headers,
-          params
-        });
-      })
-    );
-  }
 }

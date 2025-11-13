@@ -1,0 +1,182 @@
+[
+    {
+        "city_name": "Istanbul",
+        "city_iata_code": "IST",
+        "country_name": "Turkey",
+        "country_code": "TR"
+    },
+    {
+        "city_name": "Paris",
+        "city_iata_code": "PAR",
+        "country_name": "France",
+        "country_code": "FR"
+    },
+    {
+        "city_name": "New York",
+        "city_iata_code": "NYC",
+        "country_name": "United States",
+        "country_code": "US"
+    },
+    {
+        "city_name": "Tokyo",
+        "city_iata_code": "TYO",
+        "country_name": "Japan",
+        "country_code": "JP"
+    },
+    {
+        "city_name": "Dubai",
+        "city_iata_code": "DXB",
+        "country_name": "United Arab Emirates",
+        "country_code": "AE"
+    },
+    {
+        "city_name": "London",
+        "city_iata_code": "LON",
+        "country_name": "United Kingdom",
+        "country_code": "GB"
+    },
+    {
+        "city_name": "Rome",
+        "city_iata_code": "ROM",
+        "country_name": "Italy",
+        "country_code": "IT"
+    },
+    {
+        "city_name": "Barcelona",
+        "city_iata_code": "BCN",
+        "country_name": "Spain",
+        "country_code": "ES"
+    },
+    {
+        "city_name": "Berlin",
+        "city_iata_code": "BER",
+        "country_name": "Germany",
+        "country_code": "DE"
+    },
+    {
+        "city_name": "Los Angeles",
+        "city_iata_code": "LAX",
+        "country_name": "United States",
+        "country_code": "US"
+    },
+    {
+        "city_name": "Bangkok",
+        "city_iata_code": "BKK",
+        "country_name": "Thailand",
+        "country_code": "TH"
+    },
+    {
+        "city_name": "Singapore",
+        "city_iata_code": "SIN",
+        "country_name": "Singapore",
+        "country_code": "SG"
+    },
+    {
+        "city_name": "Hong Kong",
+        "city_iata_code": "HKG",
+        "country_name": "Hong Kong",
+        "country_code": "HK"
+    },
+    {
+        "city_name": "Sydney",
+        "city_iata_code": "SYD",
+        "country_name": "Australia",
+        "country_code": "AU"
+    },
+    {
+        "city_name": "San Francisco",
+        "city_iata_code": "SFO",
+        "country_name": "United States",
+        "country_code": "US"
+    },
+    {
+        "city_name": "Toronto",
+        "city_iata_code": "YTO",
+        "country_name": "Canada",
+        "country_code": "CA"
+    },
+    {
+        "city_name": "Moscow",
+        "city_iata_code": "MOW",
+        "country_name": "Russia",
+        "country_code": "RU"
+    },
+    {
+        "city_name": "Amsterdam",
+        "city_iata_code": "AMS",
+        "country_name": "Netherlands",
+        "country_code": "NL"
+    },
+    {
+        "city_name": "Vienna",
+        "city_iata_code": "VIE",
+        "country_name": "Austria",
+        "country_code": "AT"
+    },
+    {
+        "city_name": "Prague",
+        "city_iata_code": "PRG",
+        "country_name": "Czech Republic",
+        "country_code": "CZ"
+    },
+    {
+        "city_name": "Seoul",
+        "city_iata_code": "SEL",
+        "country_name": "South Korea",
+        "country_code": "KR"
+    },
+    {
+        "city_name": "Rio de Janeiro",
+        "city_iata_code": "RIO",
+        "country_name": "Brazil",
+        "country_code": "BR"
+    },
+    {
+        "city_name": "Mexico City",
+        "city_iata_code": "MEX",
+        "country_name": "Mexico",
+        "country_code": "MX"
+    },
+    {
+        "city_name": "Cairo",
+        "city_iata_code": "CAI",
+        "country_name": "Egypt",
+        "country_code": "EG"
+    },
+    {
+        "city_name": "Mumbai",
+        "city_iata_code": "BOM",
+        "country_name": "India",
+        "country_code": "IN"
+    },
+    {
+        "city_name": "Beijing",
+        "city_iata_code": "BJS",
+        "country_name": "China",
+        "country_code": "CN"
+    },
+    {
+        "city_name": "Johannesburg",
+        "city_iata_code": "JNB",
+        "country_name": "South Africa",
+        "country_code": "ZA"
+    },
+    {
+        "city_name": "Lisbon",
+        "city_iata_code": "LIS",
+        "country_name": "Portugal",
+        "country_code": "PT"
+    },
+    {
+        "city_name": "Athens",
+        "city_iata_code": "ATH",
+        "country_name": "Greece",
+        "country_code": "GR"
+    },
+    {
+        "city_name": "Buenos Aires",
+        "city_iata_code": "BUE",
+        "country_name": "Argentina",
+        "country_code": "AR"
+    }
+]

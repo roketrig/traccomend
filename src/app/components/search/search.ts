@@ -1,89 +1,127 @@
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
-import { FormControl, FormsModule } from '@angular/forms';
-import { map, Observable, of, startWith, switchMap } from 'rxjs';
+import { FormControl, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { CitySearch } from '../../services/city-search/city-search';
-
+import { CityService, City } from '../../services/city-search/cities';
+import { searchInterface } from '../../search.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
   standalone: true,
   imports: [FormsModule, MatAutocompleteModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, CommonModule],
   templateUrl: './search.html',
-  styleUrl: './search.css'
+  styleUrls: ['./search.css']
 })
 export class Search implements OnInit {
   @Output() searchCompleted = new EventEmitter<void>();
-  selectedCity: { name: string } | null = null;
-  selectedCountry: { name: string } | null = null;
-  duration: number = 0;
-  budget: number = 0;
 
-  constructor(private cityService: CitySearch) { }
+  // İki ayrı FormControl
+  targetCityControl = new FormControl('');
+  departureCityControl = new FormControl('');
+  originCityControl = new FormControl('');
 
-  cityControl = new FormControl('');
-  allAirports: any[] = [];
-  filteredCities!: Observable<string[]>;
-  selectedCityAirports: any[] = [];
+  cities: City[] = [];
+  filteredTargetCities!: Observable<City[]>;
+  filteredDepartureCities!: Observable<City[]>;
+  filteredOriginCities!: Observable<City[]>;
 
+
+  selectedTargetCity: City | null = null;
+  selectedDepartureCity: City | null = null;
+  selectedOriginCountry: City | null = null;
+
+  departureDate = '';
+  returnDate = '';
+  adult = 1;
+
+  constructor(private cityService: CityService, private router: Router) { }
 
   ngOnInit(): void {
+    this.cityService.getCities().subscribe(data => {
+      this.cities = data;
 
-    this.cityService.getCity('istanbul').subscribe({
-      next: res => console.log(res),
-      error: err => console.error(err)
+      // Gidilecek şehir için filtre
+      this.filteredTargetCities = this.targetCityControl.valueChanges.pipe(
+        startWith(''),
+        map(value => typeof value === 'string' ? value.trim().toLowerCase() : ''),
+        map(keyword => this.cities.filter(city =>
+          city.city_name.toLowerCase().includes(keyword)
+        ))
+      );
+
+      // Başlangıç şehir için filtre
+      this.filteredDepartureCities = this.departureCityControl.valueChanges.pipe(
+        startWith(''),
+        map(value => typeof value === 'string' ? value.trim().toLowerCase() : ''),
+        map(keyword => this.cities.filter(city =>
+          city.city_name.toLowerCase().includes(keyword)
+        ))
+      );
+
+      //nerelisin
+      this.filteredOriginCities = this.originCityControl.valueChanges.pipe(
+        startWith(''),
+        map(value => typeof value === 'string' ? value.trim().toLowerCase() : ''),
+        map(keyword => this.cities.filter(city =>
+          city.country_name.toLowerCase().includes(keyword)
+        ))
+      );
+
     });
-
-    this.filteredCities = this.cityControl.valueChanges.pipe(
-      startWith(''),
-      map((value) => (value ?? '').trim()),
-      switchMap(value => {
-        if (!value || value.length < 2) {
-          return of([]); // Boş veya çok kısa ise boş liste döndür
-        }
-        return this.cityService.getCity(value).pipe(
-          map(response => {
-            this.allAirports = response.data;
-            const cities = [...new Set(this.allAirports.map(a => a.name))];
-            return cities;
-          })
-        );
-      })
-    );
   }
 
-
-  onCitySelected(cityName: string) {
-    this.selectedCityAirports = this.allAirports.filter(a => a.name === cityName);
-    console.log('Seçilen şehirdeki IATA kodları:', this.selectedCityAirports.map(a => a.iataCode));
+  displayCity(city: City): string {
+    return city ? city.city_name : '';
   }
-  onSubmit(event: Event) {
+
+  displayCountry(city: City): string {
+    return city ? city.country_name : '';
+  }
+
+  onTargetCitySelected(city: City): void {
+    this.selectedTargetCity = city;
+    console.log('Gidilecek şehir:', city.city_name);
+  }
+
+  onDepartureCitySelected(city: City): void {
+    this.selectedDepartureCity = city;
+    console.log('Başlangıç şehir:', city.city_name);
+  }
+
+  onOriginCitySelected(city: City): void {
+    this.selectedOriginCountry = city;
+    console.log('Nerelisin:', city.country_name);
+  }
+
+  onSubmit(event: Event): void {
     event.preventDefault();
 
-    if (!this.selectedCity) {
-      alert("Please select a location.");
+    if (!this.selectedTargetCity || !this.selectedDepartureCity) {
+      alert('Please select both departure and destination cities.');
       return;
     }
 
-    if (!this.selectedCountry) {
-      alert("Please select your country.");
-      return;
-    }
-
-    const payload = {
-      location: this.selectedCity,
-      travellerCountry: this.selectedCountry,
-      duration: this.duration,
-      budget: this.budget
+    const payload: searchInterface = {
+      target_city: this.selectedTargetCity.city_name,
+      target_city_iata_code: this.selectedTargetCity.city_iata_code,
+      origin_country: this.selectedOriginCountry?.country_name || '',
+      origin_country_code: this.selectedOriginCountry?.country_code || "",
+      departure_city: this.selectedDepartureCity.city_name,
+      departure_city_iata_code: this.selectedDepartureCity.city_iata_code,
+      adult: this.adult,
+      departure_date: this.departureDate,
+      return_date: this.returnDate
     };
 
-    console.log("Data to be sent to API:", payload);
+    console.log('Data to be sent to API:', payload);
     localStorage.setItem('travelSearchData', JSON.stringify(payload));
-    this.searchCompleted.emit(); // Ana component'e bildir
+    this.searchCompleted.emit();
+    this.router.navigate(['/result']);
   }
 }
