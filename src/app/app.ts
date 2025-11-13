@@ -16,7 +16,7 @@ import { SearchBarComponent } from './components/search-bar/search-bar';
     MatTabsModule,
     MatFormFieldModule,
     MatInputModule,
-    SearchBarComponent
+    SearchBarComponent,
   ],
   templateUrl: './app.html',
 })
