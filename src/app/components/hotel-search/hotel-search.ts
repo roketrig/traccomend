@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TravelHotelSearch } from '../../services/travel-hotel-search/travel-hotel-search';
 import { SearchService } from '../../shared/search';
+import { MapComponent } from '../../map-component/map-component';
 
 @Component({
   selector: 'app-hotel-search',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, MapComponent],
   templateUrl: './hotel-search.html',
   styleUrls: ['./hotel-search.css']
 })

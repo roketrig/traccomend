@@ -61,6 +61,10 @@
               <span class="detail-label">📍 Longitude:</span>
               <span class="detail-value">{{ h.longitude || 'N/A' }}</span>
             </div>
+            <button
+              class="bg-white text-blue-600 font-semibold px-4 py-2 rounded shadow hover:bg-blue-100 transition search-btn">
+              {{ isLoading ? '🔄 Processing...' : '🔍 Select ' }}
+            </button>
           </div>
         </div>
       </div>
@@ -70,5 +74,8 @@
     <div *ngIf="!isLoading && hotels.length === 0 && !error && cityCode" class="empty-state">
       <p class="empty-text">🎯 {{ cityCode }} city hotels found. Try another city code.</p>
     </div>
+
+
   </div>
+  <app-map></app-map>
 </div>
