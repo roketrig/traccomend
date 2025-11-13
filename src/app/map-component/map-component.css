@@ -1,10 +1,13 @@
+
 .map-container {
-  max-width: 600px;
+  max-width: 1120px;
   margin: 20px auto;
   border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  border-radius: 20px; 
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
+  overflow: hidden; 
 }
+
 
 .maplibre-map {
   height: 500px;

@@ -6,7 +6,7 @@
       placeholder="Type city name...">
     <mat-autocomplete  #autoTarget="matAutocomplete" [displayWith]="displayCity"
       (optionSelected)="onTargetCitySelected($event.option.value)">
-      <mat-option class="city-input" *ngFor="let city of filteredTargetCities | async" [value]="city">
+      <mat-option class="city-input mat-option" *ngFor="let city of filteredTargetCities | async" [value]="city">
         {{ city.city_name }}
       </mat-option>
     </mat-autocomplete>

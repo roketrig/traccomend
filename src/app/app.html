@@ -4,15 +4,14 @@
   </nav>
 
   <header class=" p-4 shadow-md">
-    <div class="container mx-auto flex justify-between items-center">
+    <div class="">
       <!-- Tabs-->
       <mat-tab-group [selectedIndex]="selectedTabIndex" (selectedIndexChange)="onTabChange($event)">
         <mat-tab label="TRAVEL RECOMMENDATION"></mat-tab>
         <mat-tab label="FLIGHT OFFERS"></mat-tab>
         <mat-tab label="HOTELS"></mat-tab>
       </mat-tab-group>
-      
-      <app-search-bar (actionTriggered)="handleSearch($event)"></app-search-bar>
+
     </div>
   </header>
 

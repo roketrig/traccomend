@@ -1,0 +1,10 @@
+::ng-deep .mat-tab-header {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+::ng-deep .mat-tab-labels {
+  display: flex;
+  justify-content: center;
+  gap: 2rem; 
+}

@@ -5,7 +5,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { SearchService } from './shared/search';
-import { SearchBarComponent } from './components/search-bar/search-bar';
 
 @Component({
   selector: 'app-root',
@@ -16,9 +15,9 @@ import { SearchBarComponent } from './components/search-bar/search-bar';
     MatTabsModule,
     MatFormFieldModule,
     MatInputModule,
-    SearchBarComponent,
   ],
   templateUrl: './app.html',
+  styleUrl: './app.css'
 })
 export class App {
   tabs = [
@@ -29,7 +28,7 @@ export class App {
 
   cityCode = '';
 
-  constructor(private router: Router, private searchService: SearchService) {}
+  constructor(private router: Router, private searchService: SearchService) { }
 
   get selectedTabIndex(): number {
     const url = this.router.url;
@@ -48,8 +47,8 @@ export class App {
     this.cityCode = value;
     this.searchService.updateCityCode(value);
   }
-handleSearch(cityCode: string) {
-  this.searchService.updateCityCode(cityCode);
-  this.router.navigate(['/hotels']); // 🔥 Otel sayfasına yönlendir
-}
+  handleSearch(cityCode: string) {
+    this.searchService.updateCityCode(cityCode);
+    this.router.navigate(['/hotels']);
+  }
 }
