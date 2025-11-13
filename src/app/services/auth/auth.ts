@@ -8,7 +8,7 @@ import { environment } from "../../environments/environment"
 })
 export class AuthService {
   private http = inject(HttpClient);
-  
+
   // Environment'dan alıyoruz
   private clientId = environment.amadeus.clientId;
   private clientSecret = environment.amadeus.clientSecret;
@@ -35,13 +35,12 @@ export class AuthService {
         console.log('Token received, expires in:', response.expires_in);
         this.setToken(response.access_token, response.expires_in);
       }),
-      map(res => res.access_token)
-    );
+      map(res => res.access_token));
   }
 
   ensureToken(): Observable<string> {
     const currentToken = this.token();
-    
+
     if (currentToken && this.isTokenValid()) {
       console.log('Using existing token');
       return of(currentToken);
@@ -57,10 +56,10 @@ export class AuthService {
 
   setToken(token: string, expiresIn: number = 1800): void {
     const expiryTime = Date.now() + (expiresIn * 1000);
-    
+
     localStorage.setItem(this.TOKEN_KEY, token);
     localStorage.setItem(this.TOKEN_EXPIRY_KEY, expiryTime.toString());
-    
+
     this.token.set(token);
     console.log('Token saved until:', new Date(expiryTime).toLocaleTimeString());
   }
@@ -74,29 +73,29 @@ export class AuthService {
   isTokenValid(): boolean {
     const token = this.getStoredToken();
     const expiry = localStorage.getItem(this.TOKEN_EXPIRY_KEY);
-    
+
     if (!token || !expiry) return false;
-    
+
     const isExpiringSoon = Date.now() >= (parseInt(expiry) - 300000);
-    
+
     if (isExpiringSoon) {
       return false;
     }
-    
+
     return Date.now() < parseInt(expiry);
   }
 
   private getStoredToken(): string | null {
     const token = localStorage.getItem(this.TOKEN_KEY);
     const expiry = localStorage.getItem(this.TOKEN_EXPIRY_KEY);
-    
+
     if (!token || !expiry) return null;
-    
+
     if (Date.now() >= parseInt(expiry)) {
       this.clearToken();
       return null;
     }
-    
+
     return token;
   }
 }
