@@ -31,7 +31,6 @@ export class Search implements OnInit {
   filteredDepartureCities!: Observable<City[]>;
   filteredOriginCities!: Observable<City[]>;
 
-
   selectedTargetCity: City | null = null;
   selectedDepartureCity: City | null = null;
   selectedOriginCountry: City | null = null;
@@ -39,6 +38,8 @@ export class Search implements OnInit {
   departureDate = '';
   returnDate = '';
   adult = 1;
+
+  showMoreDetails = false;
 
   constructor(private cityService: CityService, private router: Router) { }
 
@@ -74,6 +75,11 @@ export class Search implements OnInit {
       );
 
     });
+  }
+
+
+  toggleDetails() {
+    this.showMoreDetails = !this.showMoreDetails;
   }
 
   displayCity(city: City): string {

@@ -1,11 +1,15 @@
 <form class="travel-form-container space-y-6 search-section" (ngSubmit)="onSubmit($event)">
-  <h3 class="text-center">Share a sample trip here!<br>And see what <b>other destinations</b> would you like?</h3>
+  <h3 class="text-center">
+    Share a sample trip here!<br>
+    And see what <b>other destinations</b> would you like?
+  </h3>
+
   <!-- Gidilecek Şehir -->
   <mat-form-field appearance="fill" class="w-full">
     <mat-label>Destination City</mat-label>
     <input type="text" matInput [formControl]="targetCityControl" [matAutocomplete]="autoTarget"
       placeholder="Type city name...">
-    <mat-autocomplete  #autoTarget="matAutocomplete" [displayWith]="displayCity"
+    <mat-autocomplete #autoTarget="matAutocomplete" [displayWith]="displayCity"
       (optionSelected)="onTargetCitySelected($event.option.value)">
       <mat-option class="city-input mat-option" *ngFor="let city of filteredTargetCities | async" [value]="city">
         {{ city.city_name }}
@@ -39,26 +43,33 @@
     </mat-autocomplete>
   </mat-form-field>
 
-  <!-- Kalkış Tarihi -->
-  <mat-form-field appearance="fill" class="w-full">
-    <mat-label>Departure Date</mat-label>
-    <input class="city-input" matInput type="date" [(ngModel)]="departureDate" name="departureDate" required>
-  </mat-form-field>
+  <!-- Daha fazla detay butonu -->
+  <div class="text-center"> <button mat-button type="button" (click)="showMoreDetails = !showMoreDetails">
+      {{ showMoreDetails ? 'Hide Details' : 'Show More Details' }}
+    </button></div>
 
-  <!-- Dönüş Tarihi -->
-  <mat-form-field appearance="fill" class="w-full">
-    <mat-label>Return Date</mat-label>
-    <input class="city-input" matInput type="date" [(ngModel)]="returnDate" name="returnDate" required>
-  </mat-form-field>
+  <!-- Gizli alanlar -->
+  <div *ngIf="showMoreDetails" class="space-y-4">
+    <!-- Kalkış Tarihi -->
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Departure Date</mat-label>
+      <input class="city-input" matInput type="date" [(ngModel)]="departureDate" name="departureDate" required>
+    </mat-form-field>
 
-  <!-- Yetişkin Sayısı -->
-  <mat-form-field appearance="fill" class="w-full">
-    <mat-label>Adults</mat-label>
-    <input matInput type="number" [(ngModel)]="adult" name="adult" placeholder="Number of adults" min="1">
-  </mat-form-field>
+    <!-- Dönüş Tarihi -->
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Return Date</mat-label>
+      <input class="city-input" matInput type="date" [(ngModel)]="returnDate" name="returnDate" required>
+    </mat-form-field>
+
+    <!-- Yetişkin Sayısı -->
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Adults</mat-label>
+      <input matInput type="number" [(ngModel)]="adult" name="adult" placeholder="Number of adults" min="1">
+    </mat-form-field>
+  </div>
 
   <!-- Submit Butonu -->
   <button mat-raised-button color="primary" type="submit" class="travel-form-submit">
     Search Route
   </button>
-</form>

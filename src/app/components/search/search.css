@@ -82,23 +82,26 @@
 }
 
 .search-card {
-  background: #f9fafb; 
+  background: #f9fafb;
   border-radius: 20px;
   padding: 2.5rem;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
   margin-bottom: 2rem;
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
+
 .search-section {
-  background: #f1f5f9; 
+  background: #f1f5f9;
   padding: 3rem 1rem;
 }
+
 ::ng-deep .mat-autocomplete-panel {
   background-color: #fff !important;
   border: 1px solid #ccc;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 .city-input {
   width: 100%;
   padding: 1rem 1.5rem;
@@ -110,7 +113,8 @@
   transition: all 0.3s ease;
   background: white;
 }
-.mat-option{
+
+.mat-option {
   width: 100%;
   padding: 1rem 1.5rem;
   border: 2px solid #e2e8f0;
@@ -119,5 +123,27 @@
   font-weight: 500;
   text-transform: uppercase;
   transition: all 0.3s ease;
-  background: blue,;
+  background: blue, ;
+}
+
+button[mat-button] {
+  color: #11111150;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-transform: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+button[mat-button]:hover {
+  color: #fff;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+}
+
+button[mat-button]:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
 }
