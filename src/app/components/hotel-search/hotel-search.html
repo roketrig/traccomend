@@ -5,7 +5,7 @@
     <div class="search-header">
       <h1 class="search-title">🏨 Hotel finder</h1>
       <!--Hotel Button-->
-      <input [(ngModel)]="cityCode" type="text" placeholder="{{ IATACode }}" class="city-input">
+      <input [(ngModel)]="cityCode" type="text" placeholder="{{ targetedCity }}" class="city-input">
       <button
         class="bg-white text-blue-600 font-semibold px-4 py-2 rounded shadow hover:bg-blue-100 transition search-btn"
         (click)="searchHotels(cityCode); showHotelSearch = true">

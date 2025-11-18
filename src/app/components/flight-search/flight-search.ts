@@ -1,19 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FlightOffers } from '../../services/flight-offers/flight-offers';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { SearchService } from '../../shared/search';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-flight-search',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatFormFieldModule, MatInputModule],
+  imports: [CommonModule, FormsModule, MatFormFieldModule, MatInputModule, HttpClientModule],
   templateUrl: './flight-search.html',
-  styleUrl: './flight-search.css'
+  styleUrls: ['./flight-search.css']
 })
-export class FlightSearch {
+export class FlightSearch implements OnInit {
   originLocationCode = '';
   destinationLocationCode = '';
   departureDate = '';
@@ -23,9 +23,9 @@ export class FlightSearch {
   isLoading = false;
   error = '';
 
-  IATACode = ""
-ngOnInit() {
+  constructor(private flightService: FlightOffers, private http: HttpClient) {}
 
+  ngOnInit() {
     const storedData = localStorage.getItem("travelSearchData");
     const parsedData = storedData ? JSON.parse(storedData) : null;
 
@@ -33,14 +33,19 @@ ngOnInit() {
       const iataCode = parsedData.target_city_iata_code;
       const depiataCode = parsedData.departure_city_iata_code;
       const depDate = parsedData.departure_date;
-      this.originLocationCode = iataCode
-      this.destinationLocationCode = depiataCode
-      this.departureDate = depDate
-
+      this.originLocationCode = iataCode;
+      this.destinationLocationCode = depiataCode;
+      this.departureDate = depDate;
+    } else {
+      // LocalStorage yoksa mock JSON'dan veri çek
+      this.http.get<any>('assets/mock/flightSearchData.json').subscribe(data => {
+        this.originLocationCode = data.originLocationCode;
+        this.destinationLocationCode = data.destinationLocationCode;
+        this.departureDate = data.departureDate;
+        this.adults = data.adults;
+      });
     }
-  ;
-}
-  constructor(private flightService: FlightOffers) { }
+  }
 
   searchFlights() {
     this.isLoading = true;

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TravelHotelSearch } from '../../services/travel-hotel-search/travel-hotel-search';
 import { SearchService } from '../../shared/search';
-import { MapComponent } from '../../map-component/map-component';
+import { MapComponent } from '../map-component/map-component';
 import { Search } from '../search/search';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
@@ -24,6 +24,8 @@ export class HotelSearch implements OnInit {
   showHotelSearch = false;
   city = ''
   IATACode = ""
+  targetedCity = ""
+
   constructor(
     private hotelService: TravelHotelSearch,
     private searchService: SearchService,
@@ -33,10 +35,10 @@ ngOnInit() {
   this.searchService.cityCode$.subscribe(code => {
     const storedData = localStorage.getItem("travelSearchData");
     const parsedData = storedData ? JSON.parse(storedData) : null;
-
     if (parsedData) {
       const iataCode = parsedData.target_city_iata_code;
       this.cityCode = iataCode; 
+      this.targetedCity = parsedData.target_city_targetedCity
     }
   });
 }

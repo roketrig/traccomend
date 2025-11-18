@@ -1,0 +1,20 @@
+[
+  {
+    "originLocationCode": "IST",
+    "destinationLocationCode": "LHR",
+    "departureDate": "11-25-2025",
+    "adults": 1
+  },
+  {
+    "originLocationCode": "CDG",
+    "destinationLocationCode": "JFK",
+    "departureDate": "12-01-2025",
+    "adults": 2
+  },
+  {
+    "originLocationCode": "FRA",
+    "destinationLocationCode": "DXB",
+    "departureDate": "12-10-2025",
+    "adults": 1
+  }
+]

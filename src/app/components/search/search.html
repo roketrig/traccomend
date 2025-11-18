@@ -24,7 +24,7 @@
       placeholder="Type city name...">
     <mat-autocomplete #autoDeparture="matAutocomplete" [displayWith]="displayCity"
       (optionSelected)="onDepartureCitySelected($event.option.value)">
-      <mat-option class="city-input" *ngFor="let city of filteredDepartureCities | async" [value]="city">
+      <mat-option class="city-input mat-option" *ngFor="let city of filteredDepartureCities | async" [value]="city">
         {{ city.city_name }}
       </mat-option>
     </mat-autocomplete>
@@ -37,7 +37,7 @@
       placeholder="Type country name...">
     <mat-autocomplete #autoOrigin="matAutocomplete" [displayWith]="displayCountry"
       (optionSelected)="onOriginCitySelected($event.option.value)">
-      <mat-option class="city-input" *ngFor="let city of filteredOriginCities | async" [value]="city">
+      <mat-option class="city-input mat-option" *ngFor="let city of filteredOriginCities | async" [value]="city">
         {{ city.country_name }}
       </mat-option>
     </mat-autocomplete>
@@ -53,7 +53,7 @@
     <!-- Kalkış Tarihi -->
     <mat-form-field appearance="fill" class="w-full">
       <mat-label>Departure Date</mat-label>
-      <input class="city-input" matInput type="date" [(ngModel)]="departureDate" name="departureDate" required>
+      <input class="city-input mat-option" matInput type="date" [(ngModel)]="departureDate" name="departureDate" required>
     </mat-form-field>
 
     <!-- Dönüş Tarihi -->
