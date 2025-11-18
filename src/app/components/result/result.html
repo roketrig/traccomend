@@ -1,17 +1,5 @@
-<!-- <div class="bg-white p-6 rounded-xl shadow-lg">
-    <h2 class="text-xl font-bold mb-4">Recommended Cities</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div *ngFor="let rec of recommendations | slice:0:5"
-            class="bg-gray-50 p-4 rounded-lg shadow hover:shadow-md transition">
-            <h3 class="text-lg font-semibold">{{ rec.city_name }}</h3>
-            <p class="text-gray-600">{{ rec.country_name }}</p>
-        </div>
-    </div>
-</div> -->
-
-
-<div class="results">
-  <h2>Recommended Destinations</h2>
+<div class="recommendation-page">
+  <h2 class="title">Recommended Destinations</h2>
   <div class="card-container">
     <div class="card" *ngFor="let item of recommendations"
          [class.selected]="selectedCity === item"
@@ -25,12 +13,9 @@
       </div>
     </div>
   </div>
-</div>
 
-
-<!-- Geri Dön Butonu -->
-<div class="mt-6 text-center">
-    <button mat-raised-button color="primary" (click)="goBack()" class="px-6 py-2 rounded-lg">
-        ← Back to Search
-    </button>
+  <!-- Back Button -->
+  <div class="back-btn">
+    <button mat-raised-button color="primary" (click)="goBack()">← Back to Search</button>
+  </div>
 </div>
