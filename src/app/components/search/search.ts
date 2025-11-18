@@ -78,8 +78,11 @@ export class Search implements OnInit {
   }
 
 
-  toggleDetails() {
-    this.showMoreDetails = !this.showMoreDetails;
+  scrollToBottom() {
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: 'smooth'
+    });
   }
 
   displayCity(city: City): string {

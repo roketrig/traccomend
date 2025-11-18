@@ -1,75 +1,79 @@
-<form class="travel-form-container space-y-6 search-section" (ngSubmit)="onSubmit($event)">
-  <h3 class="text-center">
-    Share a sample trip here!<br>
-    And see what <b>other destinations</b> would you like?
-  </h3>
+<div class="travel-recommendation-page">
+  <form class="travel-form-container space-y-6 search-section" (ngSubmit)="onSubmit($event)">
+    <h3 class="text-center">
+      Share a sample trip here!<br>
+      And see what <b>other destinations</b> would you like?
+    </h3>
 
-  <!-- Gidilecek Şehir -->
-  <mat-form-field appearance="fill" class="w-full">
-    <mat-label>Destination City</mat-label>
-    <input type="text" matInput [formControl]="targetCityControl" [matAutocomplete]="autoTarget"
-      placeholder="Type city name...">
-    <mat-autocomplete #autoTarget="matAutocomplete" [displayWith]="displayCity"
-      (optionSelected)="onTargetCitySelected($event.option.value)">
-      <mat-option class="city-input mat-option" *ngFor="let city of filteredTargetCities | async" [value]="city">
-        {{ city.city_name }}
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
-
-  <!-- Başlangıç Şehir -->
-  <mat-form-field appearance="fill" class="w-full">
-    <mat-label>Departure City</mat-label>
-    <input type="text" matInput [formControl]="departureCityControl" [matAutocomplete]="autoDeparture"
-      placeholder="Type city name...">
-    <mat-autocomplete #autoDeparture="matAutocomplete" [displayWith]="displayCity"
-      (optionSelected)="onDepartureCitySelected($event.option.value)">
-      <mat-option class="city-input mat-option" *ngFor="let city of filteredDepartureCities | async" [value]="city">
-        {{ city.city_name }}
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
-
-  <!-- Nerelisin -->
-  <mat-form-field appearance="fill" class="w-full">
-    <mat-label>Where are you from?</mat-label>
-    <input type="text" matInput [formControl]="originCityControl" [matAutocomplete]="autoOrigin"
-      placeholder="Type country name...">
-    <mat-autocomplete #autoOrigin="matAutocomplete" [displayWith]="displayCountry"
-      (optionSelected)="onOriginCitySelected($event.option.value)">
-      <mat-option class="city-input mat-option" *ngFor="let city of filteredOriginCities | async" [value]="city">
-        {{ city.country_name }}
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
-
-  <!-- Daha fazla detay butonu -->
-  <div class="text-center"> <button mat-button type="button" (click)="showMoreDetails = !showMoreDetails">
-      {{ showMoreDetails ? 'Hide Details' : 'Show More Details' }}
-    </button></div>
-
-  <!-- Gizli alanlar -->
-  <div *ngIf="showMoreDetails" class="space-y-4">
-    <!-- Kalkış Tarihi -->
+    <!-- Gidilecek Şehir -->
     <mat-form-field appearance="fill" class="w-full">
-      <mat-label>Departure Date</mat-label>
-      <input class="city-input mat-option" matInput type="date" [(ngModel)]="departureDate" name="departureDate" required>
+      <mat-label>Destination City</mat-label>
+      <input type="text" matInput [formControl]="targetCityControl" [matAutocomplete]="autoTarget"
+        placeholder="Type city name..." (focus)="scrollToBottom()">
+      <mat-autocomplete #autoTarget="matAutocomplete" [displayWith]="displayCity"
+        (optionSelected)="onTargetCitySelected($event.option.value)">
+        <mat-option class="city-input mat-option" *ngFor="let city of filteredTargetCities | async" [value]="city">
+          {{ city.city_name }}
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
 
-    <!-- Dönüş Tarihi -->
+    <!-- Başlangıç Şehir -->
     <mat-form-field appearance="fill" class="w-full">
-      <mat-label>Return Date</mat-label>
-      <input class="city-input" matInput type="date" [(ngModel)]="returnDate" name="returnDate" required>
+      <mat-label>Departure City</mat-label>
+      <input type="text" matInput [formControl]="departureCityControl" [matAutocomplete]="autoDeparture"
+        placeholder="Type city name..." (focus)="scrollToBottom()">
+      <mat-autocomplete #autoDeparture="matAutocomplete" [displayWith]="displayCity"
+        (optionSelected)="onDepartureCitySelected($event.option.value)">
+        <mat-option class="city-input mat-option" *ngFor="let city of filteredDepartureCities | async" [value]="city">
+          {{ city.city_name }}
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
 
-    <!-- Yetişkin Sayısı -->
+    <!-- Nerelisin -->
     <mat-form-field appearance="fill" class="w-full">
-      <mat-label>Adults</mat-label>
-      <input matInput type="number" [(ngModel)]="adult" name="adult" placeholder="Number of adults" min="1">
+      <mat-label>Where are you from?</mat-label>
+      <input type="text" matInput [formControl]="originCityControl" [matAutocomplete]="autoOrigin"
+        placeholder="Type country name..." (focus)="scrollToBottom()">
+      <mat-autocomplete #autoOrigin="matAutocomplete" [displayWith]="displayCountry"
+        (optionSelected)="onOriginCitySelected($event.option.value)">
+        <mat-option class="city-input mat-option" *ngFor="let city of filteredOriginCities | async" [value]="city">
+          {{ city.country_name }}
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
-  </div>
 
-  <!-- Submit Butonu -->
-  <button mat-raised-button color="primary" type="submit" class="travel-form-submit">
-    Search Route
-  </button>
+    <!-- Daha fazla detay butonu -->
+    <div class="text-center"> <button mat-button type="button" (click)="showMoreDetails = !showMoreDetails">
+        {{ showMoreDetails ? 'Hide Details' : 'Show More Details' }}
+      </button></div>
+
+    <!-- Gizli alanlar -->
+    <div *ngIf="showMoreDetails" class="space-y-4">
+      <!-- Kalkış Tarihi -->
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Departure Date</mat-label>
+        <input class="city-input mat-option" matInput type="date" [(ngModel)]="departureDate" name="departureDate"
+          required (focus)="scrollToBottom()">
+      </mat-form-field>
+
+      <!-- Dönüş Tarihi -->
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Return Date</mat-label>
+        <input class="city-input" matInput type="date" [(ngModel)]="returnDate" name="returnDate" required (focus)="scrollToBottom()">
+      </mat-form-field>
+
+      <!-- Yetişkin Sayısı -->
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Adults</mat-label>
+        <input matInput type="number" [(ngModel)]="adult" name="adult" placeholder="Number of adults" min="1" (focus)="scrollToBottom()">
+      </mat-form-field>
+    </div>
+
+    <!-- Submit Butonu -->
+    <button mat-raised-button color="primary" type="submit" class="travel-form-submit">
+      Search Route
+    </button>
+  </form>
+</div>

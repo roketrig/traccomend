@@ -1,5 +1,12 @@
+.travel-recommendation-page{
+  background-image: url("../../../../public/assets/search_background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  align-content: center;
+}
 .travel-form-container {
-  max-width: 720px;
+  width: 720px;
   margin: 0 auto;
   padding: 2.5rem;
   background: white;
@@ -79,16 +86,6 @@
     padding: 1.5rem;
     margin: 0 1rem;
   }
-}
-
-.search-card {
-  background: #f9fafb;
-  border-radius: 20px;
-  padding: 2.5rem;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
-  margin-bottom: 2rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .search-section {
