@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { FlightOffers } from '../../services/flight-offers/flight-offers';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { SearchService } from '../../shared/search';
 
 @Component({
   selector: 'app-flight-search',
@@ -22,6 +23,23 @@ export class FlightSearch {
   isLoading = false;
   error = '';
 
+  IATACode = ""
+ngOnInit() {
+
+    const storedData = localStorage.getItem("travelSearchData");
+    const parsedData = storedData ? JSON.parse(storedData) : null;
+
+    if (parsedData) {
+      const iataCode = parsedData.target_city_iata_code;
+      const depiataCode = parsedData.departure_city_iata_code;
+      const depDate = parsedData.departure_date;
+      this.originLocationCode = iataCode
+      this.destinationLocationCode = depiataCode
+      this.departureDate = depDate
+
+    }
+  ;
+}
   constructor(private flightService: FlightOffers) { }
 
   searchFlights() {

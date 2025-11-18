@@ -78,7 +78,7 @@ export class ResultComponent implements OnInit {
       if (type === 'hotels') {
         this.router.navigate(['/hotels']);
       } else {
-        this.router.navigate(['/flights']);
+        this.router.navigate(['/flight-offers']);
       }
     }
   }

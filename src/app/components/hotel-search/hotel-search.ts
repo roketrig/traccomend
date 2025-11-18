@@ -22,23 +22,24 @@ export class HotelSearch implements OnInit {
   error = '';
   cityCode = '';
   showHotelSearch = false;
-   city = ''
+  city = ''
+  IATACode = ""
   constructor(
     private hotelService: TravelHotelSearch,
     private searchService: SearchService,
   ) { }
+// stored data = IATA code 
+ngOnInit() {
+  this.searchService.cityCode$.subscribe(code => {
+    const storedData = localStorage.getItem("travelSearchData");
+    const parsedData = storedData ? JSON.parse(storedData) : null;
 
-  ngOnInit() {
-    this.searchService.cityCode$.subscribe(code => {
-      if (code && code.length === 3) {
-        this.searchHotels(code);
-        const storedData = localStorage.getItem("travelSearchData");
-        const parsedData = storedData ? JSON.parse(storedData) : null;
-        const city = parsedData.target_city;
-
-      }
-    });
-  }
+    if (parsedData) {
+      const iataCode = parsedData.target_city_iata_code;
+      this.cityCode = iataCode; 
+    }
+  });
+}
 
   searchHotels(cityCode: string) {
     this.cityCode = cityCode.toUpperCase();
