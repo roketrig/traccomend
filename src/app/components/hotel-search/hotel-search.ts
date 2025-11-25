@@ -83,38 +83,7 @@ export class HotelSearch implements OnInit {
   selectHotel(hotel: any) {
     const storedData = localStorage.getItem('travelSearchData');
     const parsedData = storedData ? JSON.parse(storedData) : null;
-    // <div *ngFor="let h of hotels.slice(0, 12); let i = index" class="hotel-card">
-    //           <h3 class="hotel-name">{{ i + 1 }}. {{ h.name }}</h3>
-
-    //           <div class="hotel-details">
-    //             <div class="detail-item">
-    //               <span class="detail-label">🏷️ Hotel ID:</span>
-    //               <span class="detail-value">{{ h.hotelId }}</span>
-    //             </div>
-    //             <div class="detail-item">
-    //               <span class="detail-label">🔗 Dupe ID:</span>
-    //               <span class="detail-value">{{ h.dupeId || 'N/A' }}</span>
-    //             </div>
-    //             <div class="detail-item">
-    //               <span class="detail-label">🏢 Chain:</span>
-    //               <span class="detail-value">{{ h.chainCode || 'N/A' }}</span>
-    //             </div>
-    //             <div class="detail-item">
-    //               <span class="detail-label">🏙️ City:</span>
-    //               <span class="detail-value">{{ h.cityCode || 'N/A' }}</span>
-    //             </div>
-    //             <div class="detail-item">
-    //               <span class="detail-label">📍 Latitude:</span>
-    //               <span class="detail-value">{{ h.latitude || 'N/A' }}</span>
-    //             </div>
-    //             <div class="detail-item">
-    //               <span class="detail-label">📍 Longitude:</span>
-    //               <span class="detail-value">{{ h.longitude || 'N/A' }}</span>
-    //             </div>
-    //             <button (click)="selectHotel(h)" (click)="hotelLocation(h.latitude, h.longitude)">📍 Select</button>
-
-    //           </div>
-    //         </div>
+    
 
     parsedData.selectedHotel.name = hotel.name;
 
