@@ -31,7 +31,8 @@
       <input type="number" class="city-input" [(ngModel)]="adults" min="1" />
     </div>
     <button
-      class="bg-white text-blue-600 font-semibold px-4 py-2 rounded shadow hover:bg-blue-100 transition search-btn" (click)="searchFlights();">
+      class="bg-white text-blue-600 font-semibold px-4 py-2 rounded shadow hover:bg-blue-100 transition search-btn"
+      (click)="searchFlights();">
       {{ isLoading ? '🔄 Processing...' : '🔍 Search Flight Offers' }}
     </button>
   </div>
@@ -64,6 +65,9 @@
             <span class="detail-label">Price</span>
             <span class="detail-value">{{ offer.price?.total }} {{ offer.price?.currency }}</span>
           </div>
+          <button mat-raised-button color="primary" (click)="selectFlight(offer)">
+            Select Flight
+          </button>
         </div>
       </div>
     </div>

@@ -21,7 +21,6 @@ import { SearchService } from './shared/search';
 })
 export class App {
   tabs = [
-     { route: "/ai-search" },
     { route: "/travel-recommendation" },
     { route: '/flight-offers' },
     { route: '/hotels' }

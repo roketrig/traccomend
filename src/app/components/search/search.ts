@@ -117,6 +117,7 @@ export class Search implements OnInit {
     }
 
     const payload: searchInterface = {
+      count: 0,
       target_city: this.selectedTargetCity.city_name,
       target_city_iata_code: this.selectedTargetCity.city_iata_code,
       origin_country: this.selectedOriginCountry?.country_name || '',
@@ -125,7 +126,19 @@ export class Search implements OnInit {
       departure_city_iata_code: this.selectedDepartureCity.city_iata_code,
       adult: this.adult,
       departure_date: this.departureDate,
-      return_date: this.returnDate
+      return_date: this.returnDate,
+      selectedFlight: {
+        from: "",
+        to: "",
+        name: "",
+        price: "",
+      },
+      selectedHotel: {
+        name: "",
+        nights: 0,
+        latitude: 0,
+        longitude: 0,
+      }
     };
 
     console.log('Data to be sent to API:', payload);
