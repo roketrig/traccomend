@@ -1,0 +1,35 @@
+
+<div class="p-6 bg-white rounded-xl shadow-lg max-w-lg mx-auto">
+  <h2 class="text-xl font-bold mb-4">AI City Recommendation</h2>
+
+  <form (ngSubmit)="onSubmit()" class="space-y-4">
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Country</mat-label>
+      <input matInput [formControl]="countryControl" placeholder="Enter country">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Interests</mat-label>
+      <input matInput [formControl]="interestControl" placeholder="e.g. culture, beaches">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="loading">
+      Get Recommendations
+    </button>
+  </form>
+
+  <div *ngIf="loading" class="mt-4 flex justify-center">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+
+  <div *ngIf="errorMessage" class="mt-4 text-red-600">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="recommendedCities.length > 0" class="mt-6">
+    <h3 class="text-lg font-semibold mb-2">Recommended Cities:</h3>
+    <ul class="list-disc pl-5">
+      <li *ngFor="let city of recommendedCities">{{ city }}</li>
+    </ul>
+  </div>
+</div>
