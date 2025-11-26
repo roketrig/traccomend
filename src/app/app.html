@@ -1,23 +1,28 @@
 <div>
-  <nav class="bg-purple-900 justify-center items-center h-16 p-5 mx-auto block">
-    <a class="text-white font-bold text-xl mx-auto" href="">Traccomend</a>
-  </nav>
+<nav class="bg-purple-900 h-16 flex items-center relative">
+  <a class="text-white font-bold text-xl ml-4">Traccomend</a>
+  <div class="absolute top-1/2 -translate-y-1/2 h-1 bg-gray-300 transition-all duration-500"
+       [style.width]="lineWidth"
+       [style.left]="lineOffset">
+  </div>
 
+  <div class="absolute top-1/2 -translate-y-1/2 transition-all duration-500"
+       [style.left]="planeX">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+         fill="white" class="w-10 h-10">
+      <path d="M2.5 19.5L21.5 12L2.5 4.5L2.5 10L15.5 12L2.5 14Z"/>
+    </svg>
+  </div>
+</nav>
   <header class="bg-gray-100 p-2 shadow-lg">
-    <div class="">
-      <!-- Tabs-->
-      <mat-tab-group [selectedIndex]="selectedTabIndex" (selectedIndexChange)="onTabChange($event)">
-        <mat-tab label="TRAVEL RECOMMENDATION"></mat-tab>
-        <mat-tab label="FLIGHT OFFERS"></mat-tab>
-        <mat-tab label="HOTELS"></mat-tab>
-      </mat-tab-group>
-
-    </div>
+    <mat-tab-group [selectedIndex]="selectedTabIndex" (selectedIndexChange)="onTabChange($event)">
+      <mat-tab label="TRAVEL RECOMMENDATION"></mat-tab>
+      <mat-tab label="FLIGHT OFFERS"></mat-tab>
+      <mat-tab label="HOTELS"></mat-tab>
+    </mat-tab-group>
   </header>
-
-  <main class=" w-full">
+  <main class="w-full">
     <router-outlet></router-outlet>
   </main>
-
-<app-enter></app-enter>
+  <app-enter></app-enter>
 </div>

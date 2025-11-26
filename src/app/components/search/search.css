@@ -150,3 +150,38 @@ button[mat-button]:active {
   border: 1px solid #ccc;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+
+
+:host {
+  display: block;
+  margin-top: 1rem;
+}
+
+.animated-button {
+  border: none;
+  margin-top: 1em;
+  padding: 12px 24px;
+  font-weight: 600;
+  font-size: 18px;
+  opacity: 0.9;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  border-radius: 12px;
+  transition: all 0.6s ease;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.animated-button.open {
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+  opacity: 1;
+  padding: 16px 32px;
+  font-size: 20px;
+  box-shadow: 0 6px 18px rgba(67, 233, 123, 0.4);
+}
+
+.animated-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.6);
+}
+

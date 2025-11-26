@@ -1,3 +1,4 @@
+
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
@@ -19,11 +20,11 @@ import { Enter } from './enter/enter';
     Enter
   ],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrls: ['./app.css']
 })
 export class App {
   tabs = [
-    { route: "/travel-recommendation" },
+    { route: '/travel-recommendation' },
     { route: '/flight-offers' },
     { route: '/hotels' }
   ];
@@ -38,19 +39,44 @@ export class App {
     return idx >= 0 ? idx : 0;
   }
 
+
+  // plane offset.
+  planeX = '0px';
+  lineWidth = '0px';
+  lineOffset = '150px';
+
+
   onTabChange(index: number) {
-    const route = this.tabs[index]?.route;
-    if (route) {
-      this.router.navigate([route]);
-    }
+    const tabCount = this.tabs.length;
+    const navbarWidth = window.innerWidth;
+    const step = navbarWidth / tabCount;
+    const iconHalf = 20;
+    const offset = 148;
+    const route = this.tabs[index]?.route; if (route) { this.router.navigate([route]); }
+    const x = index * step + step / 2 - iconHalf;
+    this.planeX = `${x}px`;
+
+    const width = x - offset > 0 ? x - offset : 0;
+    this.lineWidth = `${width}px`;
   }
+
+
 
   onCityCodeChange(value: string) {
     this.cityCode = value;
     this.searchService.updateCityCode(value);
   }
+
   handleSearch(cityCode: string) {
     this.searchService.updateCityCode(cityCode);
     this.router.navigate(['/hotels']);
   }
+
+  getPlanePosition(): string {
+    const navbarWidth = window.innerWidth;
+    const tabCount = this.tabs.length;
+    const step = navbarWidth / tabCount;
+    return `translateX(${this.selectedTabIndex * step}px)`;
+  }
+
 }
