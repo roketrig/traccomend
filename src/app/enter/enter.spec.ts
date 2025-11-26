@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SearchAIComponent } from './search-ai';
+import { Enter } from './enter';
 
-describe('SearchAi', () => {
-  let component: SearchAIComponent;
-  let fixture: ComponentFixture<SearchAIComponent>;
+describe('Enter', () => {
+  let component: Enter;
+  let fixture: ComponentFixture<Enter>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SearchAIComponent]
+      imports: [Enter]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SearchAIComponent);
+    fixture = TestBed.createComponent(Enter);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

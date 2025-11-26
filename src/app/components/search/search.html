@@ -64,14 +64,12 @@
         <input class="city-input" matInput type="date" [(ngModel)]="returnDate" name="returnDate" required (focus)="scrollToBottom()">
       </mat-form-field>
 
-      <!-- Yetişkin Sayısı -->
       <mat-form-field appearance="fill" class="w-full">
         <mat-label>Adults</mat-label>
         <input matInput type="number" [(ngModel)]="adult" name="adult" placeholder="Number of adults" min="1" (focus)="scrollToBottom()">
       </mat-form-field>
     </div>
 
-    <!-- Submit Butonu -->
     <button mat-raised-button color="primary" type="submit" class="travel-form-submit">
       Search Route
     </button>

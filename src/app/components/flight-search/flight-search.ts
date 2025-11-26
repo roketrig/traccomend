@@ -37,7 +37,6 @@ export class FlightSearch implements OnInit {
       this.destinationLocationCode = depiataCode;
       this.departureDate = depDate;
     } else {
-      // LocalStorage yoksa mock JSON'dan veri çek
       this.http.get<any>('assets/mock/flightSearchData.json').subscribe(data => {
         this.originLocationCode = data.originLocationCode;
         this.destinationLocationCode = data.destinationLocationCode;

@@ -5,6 +5,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { SearchService } from './shared/search';
+import { Enter } from './enter/enter';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,7 @@ import { SearchService } from './shared/search';
     MatTabsModule,
     MatFormFieldModule,
     MatInputModule,
+    Enter
   ],
   templateUrl: './app.html',
   styleUrl: './app.css'

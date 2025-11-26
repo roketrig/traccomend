@@ -21,7 +21,6 @@ import { Router } from '@angular/router';
 export class Search implements OnInit {
   @Output() searchCompleted = new EventEmitter<void>();
 
-  // İki ayrı FormControl
   targetCityControl = new FormControl('');
   departureCityControl = new FormControl('');
   originCityControl = new FormControl('');
@@ -47,7 +46,6 @@ export class Search implements OnInit {
     this.cityService.getCities().subscribe(data => {
       this.cities = data;
 
-      // Gidilecek şehir için filtre
       this.filteredTargetCities = this.targetCityControl.valueChanges.pipe(
         startWith(''),
         map(value => typeof value === 'string' ? value.trim().toLowerCase() : ''),
@@ -56,7 +54,6 @@ export class Search implements OnInit {
         ))
       );
 
-      // Başlangıç şehir için filtre
       this.filteredDepartureCities = this.departureCityControl.valueChanges.pipe(
         startWith(''),
         map(value => typeof value === 'string' ? value.trim().toLowerCase() : ''),
@@ -65,7 +62,6 @@ export class Search implements OnInit {
         ))
       );
 
-      //nerelisin
       this.filteredOriginCities = this.originCityControl.valueChanges.pipe(
         startWith(''),
         map(value => typeof value === 'string' ? value.trim().toLowerCase() : ''),
