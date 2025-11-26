@@ -23,7 +23,6 @@ import { Enter } from './enter/enter';
 })
 export class App {
   tabs = [
-     { route: "/ai-search" },
     { route: "/travel-recommendation" },
     { route: '/flight-offers' },
     { route: '/hotels' }

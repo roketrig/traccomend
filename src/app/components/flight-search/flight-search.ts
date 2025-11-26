@@ -23,7 +23,7 @@ export class FlightSearch implements OnInit {
   isLoading = false;
   error = '';
 
-  constructor(private flightService: FlightOffers, private http: HttpClient) {}
+  constructor(private flightService: FlightOffers, private http: HttpClient) { }
 
   ngOnInit() {
     const storedData = localStorage.getItem("travelSearchData");
@@ -68,5 +68,17 @@ export class FlightSearch implements OnInit {
         this.isLoading = false;
       }
     });
+  }
+  selectFlight(offer: any) {
+    const storedData = localStorage.getItem('travelSearchData');
+    const parsedData = storedData ? JSON.parse(storedData) : null;
+
+    parsedData.selectedFlight.from = offer.itineraries[0]?.segments[0]?.departure?.iataCode;
+    parsedData.selectedFlight.to = offer.itineraries[0]?.segments[0]?.arrival?.iataCode;
+    parsedData.selectedFlight.name = offer.itineraries[0]?.segments[0]?.carrierCode + " " + offer.itineraries[0]?.segments[0]?.number;
+    parsedData.selectedFlight.price = offer.price?.total + " " + offer.price?.currency;
+    parsedData.count = (parsedData.count || 0) + 1;
+    localStorage.setItem('travelSearchData', JSON.stringify(parsedData));
+    console.log('✅ Flight saved to LocalStorage:', parsedData);
   }
 }

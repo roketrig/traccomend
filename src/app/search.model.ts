@@ -1,4 +1,5 @@
 export interface searchInterface {
+    count: number,
     target_city: string,
     target_city_iata_code: string,
     origin_country: string,
@@ -8,4 +9,18 @@ export interface searchInterface {
     adult: number,
     departure_date: string,
     return_date: string,
+
+    selectedFlight?: {
+        from: string;
+        to: string;
+        name: string;
+        price: string;
+    };
+
+    selectedHotel?: {
+        name: string;
+        nights: number;
+        latitude: number;
+        longitude: number;
+    };
 }

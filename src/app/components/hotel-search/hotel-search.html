@@ -61,7 +61,7 @@
               <span class="detail-label">📍 Longitude:</span>
               <span class="detail-value">{{ h.longitude || 'N/A' }}</span>
             </div>
-            <button (click)="hotelLocation(h.latitude, h.longitude)">📍 Select</button>
+            <button (click)="selectHotel(h)" (click)="hotelLocation(h.latitude, h.longitude)">📍 Select</button>
 
           </div>
         </div>
