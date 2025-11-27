@@ -113,7 +113,6 @@ export class Search implements OnInit {
     }
 
     const payload: searchInterface = {
-      count: 0,
       target_city: this.selectedTargetCity.city_name,
       target_city_iata_code: this.selectedTargetCity.city_iata_code,
       origin_country: this.selectedOriginCountry?.country_name || '',
@@ -124,12 +123,14 @@ export class Search implements OnInit {
       departure_date: this.departureDate,
       return_date: this.returnDate,
       selectedFlight: {
+        selected: false,
         from: "",
         to: "",
         name: "",
         price: "",
       },
       selectedHotel: {
+        selected: false,
         name: "",
         nights: 0,
         latitude: 0,

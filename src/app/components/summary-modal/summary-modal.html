@@ -1,0 +1,35 @@
+<h2 mat-dialog-title class="text-bold text-purple-700">Your Travel Summary</h2>
+
+<div mat-dialog-content *ngIf="summaryData" class="space-y-4">
+    <!-- Trip Details -->
+    <mat-card class="p-4 shadow-md">
+        <h3 class="font-semibold text-lg mb-2">Trip Details</h3>
+        <p><strong>From:</strong> {{ summaryData.departure_city }} ({{ summaryData.departure_city_iata_code }})</p>
+        <p><strong>To:</strong> {{ summaryData.target_city }} ({{ summaryData.target_city_iata_code }})</p>
+        <p><strong>Dates:</strong> {{ summaryData.departure_date }} → {{ summaryData.return_date }}</p>
+        <p><strong>Adults:</strong> {{ summaryData.adult }}</p>
+    </mat-card>
+
+    <!-- Flight Details -->
+    <mat-card *ngIf="summaryData.selectedFlight" class="p-4 shadow-md">
+        <h3 class="font-semibold text-lg mb-2">Flight</h3>
+        <p><strong>Flight:</strong> {{ summaryData.selectedFlight.name }}</p>
+        <p><strong>From:</strong> {{ summaryData.selectedFlight.from }} → {{ summaryData.selectedFlight.to }}</p>
+        <p><strong>Price:</strong> {{ summaryData.selectedFlight.price }}</p>
+    </mat-card>
+
+    <!-- Hotel Details -->
+    <mat-card *ngIf="summaryData.selectedHotel" class="p-4 shadow-md">
+        <h3 class="font-semibold text-lg mb-2">Hotel</h3>
+        <p><strong>Name:</strong> {{ summaryData.selectedHotel.name }}</p>
+        <p><strong>Nights:</strong> {{ summaryData.selectedHotel.nights }}</p>
+        <p><strong>Location:</strong> Lat: {{ summaryData.selectedHotel.latitude }}, Lng: {{
+            summaryData.selectedHotel.longitude }}</p>
+    </mat-card>
+</div>
+
+
+<div mat-dialog-actions class="flex justify-between mt-4">
+    <button mat-raised-button color="primary" mat-dialog-close>Close</button>
+    <button mat-raised-button color="accent" (click)="startNewSearch()">Start New Search</button>
+</div>

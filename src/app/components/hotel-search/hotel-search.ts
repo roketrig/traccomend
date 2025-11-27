@@ -6,6 +6,9 @@ import { SearchService } from '../../shared/search';
 import { MapComponent } from '../map-component/map-component';
 import { Search } from '../search/search';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { SummaryModal } from '../summary-modal/summary-modal';
 
 @Component({
   selector: 'app-hotel-search',
@@ -29,6 +32,8 @@ export class HotelSearch implements OnInit {
   constructor(
     private hotelService: TravelHotelSearch,
     private searchService: SearchService,
+    private router: Router,
+    private dialog: MatDialog
   ) { }
   // stored data = IATA code 
   ngOnInit() {
@@ -40,6 +45,13 @@ export class HotelSearch implements OnInit {
         this.cityCode = iataCode;
         this.targetedCity = parsedData.target_city_targetedCity
       }
+    });
+  }
+
+  openSummaryModal() {
+    this.dialog.open(SummaryModal, {
+      width: '600px',
+      height: 'auto'
     });
   }
 
@@ -80,26 +92,46 @@ export class HotelSearch implements OnInit {
   openHotelSearch() {
     this.showHotelSearch = true;
   }
+
   selectHotel(hotel: any) {
     const storedData = localStorage.getItem('travelSearchData');
-    const parsedData = storedData ? JSON.parse(storedData) : null;
-    
+    const parsedData = storedData ? JSON.parse(storedData) : {};
 
-    parsedData.selectedHotel.name = hotel.name;
-
-    let nights = 0;
+    let nights = 1;
     if (parsedData.departure_date && parsedData.return_date) {
       const start = new Date(parsedData.departure_date);
       const end = new Date(parsedData.return_date);
       const diff = end.getTime() - start.getTime();
       nights = diff > 0 ? Math.ceil(diff / (1000 * 60 * 60 * 24)) : 1;
     }
-    parsedData.selectedHotel.nights = nights;
-    parsedData.selectedHotel.latitude = hotel.latitude;
-    parsedData.selectedHotel.longitude = hotel.longitude;
-    parsedData.count = (parsedData.count || 0) + 1;
+
+    parsedData.selectedHotel = {
+      selected: true,
+      name: hotel.name,
+      nights: nights,
+      latitude: hotel.latitude,
+      longitude: hotel.longitude
+    };
+
     localStorage.setItem('travelSearchData', JSON.stringify(parsedData));
-    console.log('✅ Flight saved to LocalStorage:', parsedData);
+    console.log('✅ Hotel saved to LocalStorage:', parsedData);
+
+
+    console.log('Hotel selected:', parsedData.selectedHotel?.selected);
+    console.log('Flight selected:', parsedData.selectedFlight?.selected);
+
+
+    if (!parsedData.selectedHotel?.selected) {
+      console.log('➡ Navigating to /hotels');
+      this.router.navigate(['/hotels']);
+    } else if (!parsedData.selectedFlight?.selected) {
+      console.log('➡ Navigating to /flight-offers');
+      this.router.navigate(['/flight-offers']);
+    } else {
+      console.log('➡ Navigating to /summary');
+      this.openSummaryModal();
+    }
+
   }
 
 }

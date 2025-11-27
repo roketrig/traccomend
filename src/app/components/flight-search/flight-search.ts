@@ -5,6 +5,9 @@ import { FlightOffers } from '../../services/flight-offers/flight-offers';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { SummaryModal } from '../summary-modal/summary-modal';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-flight-search',
@@ -23,7 +26,7 @@ export class FlightSearch implements OnInit {
   isLoading = false;
   error = '';
 
-  constructor(private flightService: FlightOffers, private http: HttpClient) { }
+  constructor(private flightService: FlightOffers, private http: HttpClient, private router: Router, private dialog: MatDialog) { }
 
   ngOnInit() {
     const storedData = localStorage.getItem("travelSearchData");
@@ -45,6 +48,14 @@ export class FlightSearch implements OnInit {
       });
     }
   }
+
+  openSummaryModal() {
+    this.dialog.open(SummaryModal, {
+      width: '600px',
+      height: 'auto'
+    });
+  }
+
 
   searchFlights() {
     this.isLoading = true;
@@ -69,16 +80,37 @@ export class FlightSearch implements OnInit {
       }
     });
   }
+
   selectFlight(offer: any) {
     const storedData = localStorage.getItem('travelSearchData');
-    const parsedData = storedData ? JSON.parse(storedData) : null;
+    const parsedData = storedData ? JSON.parse(storedData) : {};
 
-    parsedData.selectedFlight.from = offer.itineraries[0]?.segments[0]?.departure?.iataCode;
-    parsedData.selectedFlight.to = offer.itineraries[0]?.segments[0]?.arrival?.iataCode;
-    parsedData.selectedFlight.name = offer.itineraries[0]?.segments[0]?.carrierCode + " " + offer.itineraries[0]?.segments[0]?.number;
-    parsedData.selectedFlight.price = offer.price?.total + " " + offer.price?.currency;
-    parsedData.count = (parsedData.count || 0) + 1;
+    parsedData.selectedFlight = {
+      selected: true,
+      from: offer.itineraries[0]?.segments[0]?.departure?.iataCode,
+      to: offer.itineraries[0]?.segments[0]?.arrival?.iataCode,
+      name: offer.itineraries[0]?.segments[0]?.carrierCode + " " + offer.itineraries[0]?.segments[0]?.number,
+      price: offer.price?.total + " " + offer.price?.currency
+    };
+
     localStorage.setItem('travelSearchData', JSON.stringify(parsedData));
     console.log('✅ Flight saved to LocalStorage:', parsedData);
+
+    console.log('Hotel selected:', parsedData.selectedHotel?.selected);
+    console.log('Flight selected:', parsedData.selectedFlight?.selected);
+
+
+    if (!parsedData.selectedHotel?.selected) {
+      console.log('➡ Navigating to /hotels');
+      this.router.navigate(['/hotels']);
+    } else if (!parsedData.selectedFlight?.selected) {
+      console.log('➡ Navigating to /flight-offers');
+      this.router.navigate(['/flight-offers']);
+    } else {
+      console.log('➡ Navigating to /summary');
+      this.openSummaryModal();
+    }
+
   }
+
 }

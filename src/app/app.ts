@@ -33,10 +33,11 @@ export class App {
 
   constructor(private router: Router, private searchService: SearchService) { }
 
+
   get selectedTabIndex(): number {
     const url = this.router.url;
     const idx = this.tabs.findIndex(tab => url.startsWith(tab.route));
-    return idx >= 0 ? idx : 0;
+    return idx >= 0 ? idx : -1; // -1: tab dışı sayfa (ör. summary)
   }
 
 
@@ -47,19 +48,33 @@ export class App {
 
 
   onTabChange(index: number) {
+    // Eğer summary gibi tab dışı bir sayfadaysak, yönlendirme yapma
+    if (this.selectedTabIndex === -1) {
+      console.log('✅ Tab dışı sayfa, yönlendirme yapılmadı.');
+      return;
+    }
+
+    const route = this.tabs[index]?.route;
+    if (route && this.router.url !== route) {
+      console.log(`➡ Navigating to ${route}`);
+      this.router.navigate([route]);
+    }
+
+    // Animasyon hesaplama
     const tabCount = this.tabs.length;
     const navbarWidth = window.innerWidth;
     const step = navbarWidth / tabCount;
     const iconHalf = 20;
     const offset = 148;
-    const route = this.tabs[index]?.route; if (route) { this.router.navigate([route]); }
     const x = index * step + step / 2 - iconHalf;
     this.planeX = `${x}px`;
+    this.lineWidth = `${x - offset > 0 ? x - offset : 0}px`;
 
-    const width = x - offset > 0 ? x - offset : 0;
-    this.lineWidth = `${width}px`;
+
+    console.log('Current URL:', this.router.url);
+    console.log('Selected Tab Index:', this.selectedTabIndex);
+
   }
-
 
 
   onCityCodeChange(value: string) {

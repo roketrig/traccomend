@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TheEndModal } from './the-end-modal';
+import { SummaryModal } from './summary-modal';
 
-describe('TheEndModal', () => {
-  let component: TheEndModal;
-  let fixture: ComponentFixture<TheEndModal>;
+describe('SummaryModal', () => {
+  let component: SummaryModal;
+  let fixture: ComponentFixture<SummaryModal>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TheEndModal]
+      imports: [SummaryModal]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TheEndModal);
+    fixture = TestBed.createComponent(SummaryModal);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

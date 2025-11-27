@@ -1,5 +1,4 @@
 export interface searchInterface {
-    count: number,
     target_city: string,
     target_city_iata_code: string,
     origin_country: string,
@@ -11,6 +10,7 @@ export interface searchInterface {
     return_date: string,
 
     selectedFlight?: {
+        selected:boolean;
         from: string;
         to: string;
         name: string;
@@ -18,6 +18,7 @@ export interface searchInterface {
     };
 
     selectedHotel?: {
+        selected:boolean;
         name: string;
         nights: number;
         latitude: number;
