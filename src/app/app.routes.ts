@@ -4,6 +4,7 @@ import { HotelSearch } from './components/hotel-search/hotel-search';
 import { Search } from './components/search/search';
 import { ResultComponent } from './components/result/result';
 import { SearchAIComponent } from './components/search-ai/search-ai';
+import { Summary } from './components/summary/summary';
 
 export const routes: Routes = [
   {
@@ -25,6 +26,10 @@ export const routes: Routes = [
   {
     path: 'result',
     component: ResultComponent
+  },
+  {
+    path: 'summary',
+    component: Summary
   },
   {
     path: '',

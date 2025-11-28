@@ -6,6 +6,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { SearchService } from './shared/search';
+import { TripStateService } from './global-state/trip-state.service';
+import { MatDialog } from '@angular/material/dialog';
+import { SummaryModal } from './components/summary-modal/summary-modal';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -28,8 +31,26 @@ export class App {
   ];
 
   cityCode = '';
+  showSummaryButton = false;
 
-  constructor(private router: Router, private searchService: SearchService) { }
+  constructor(private router: Router, private searchService: SearchService, private tripState: TripStateService, private dialog: MatDialog) { }
+
+  ngOnInit() {
+    this.tripState.summaryVisible$.subscribe(visible => {
+      this.showSummaryButton = visible;
+    });
+
+    // İlk kontrol
+    this.tripState.checkSummaryVisibility();
+  }
+
+
+  openSummaryModal() {
+    this.dialog.open(SummaryModal, {
+      width: '600px',
+      height: 'auto'
+    });
+  }
 
 
   get selectedTabIndex(): number {

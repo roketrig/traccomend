@@ -1,21 +1,18 @@
 <div>
-<nav class="bg-purple-900 h-16 flex items-center relative">
+  <nav class="bg-purple-900 h-16 flex items-center relative">
 
-<a class="logo">Traccomend</a>
+    <a class="logo m-4">Traccomend</a>
 
-  <div class="absolute top-1/2 -translate-y-1/2 h-1 bg-gray-300 transition-all duration-500"
-       [style.width]="lineWidth"
-       [style.left]="lineOffset">
-  </div>
+    <div class="absolute top-1/2 -translate-y-1/2 h-1 bg-gray-300 transition-all duration-500" [style.width]="lineWidth"
+      [style.left]="lineOffset">
+    </div>
 
-  <div class="absolute top-1/2 -translate-y-1/2 transition-all duration-500"
-       [style.left]="planeX">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-         fill="white" class="w-10 h-10">
-      <path d="M2.5 19.5L21.5 12L2.5 4.5L2.5 10L15.5 12L2.5 14Z"/>
-    </svg>
-  </div>
-</nav>
+    <div class="absolute top-1/2 -translate-y-1/2 transition-all duration-500" [style.left]="planeX">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="w-10 h-10">
+        <path d="M2.5 19.5L21.5 12L2.5 4.5L2.5 10L15.5 12L2.5 14Z" />
+      </svg>
+    </div>
+  </nav>
   <header class="bg-gray-100 p-2 shadow-lg">
     <mat-tab-group [selectedIndex]="selectedTabIndex" (selectedIndexChange)="onTabChange($event)">
       <mat-tab label="TRAVEL RECOMMENDATION"></mat-tab>
@@ -24,6 +21,11 @@
     </mat-tab-group>
   </header>
   <main class="w-full">
+    <div *ngIf="showSummaryButton" class="summary-button-container">
+      <button mat-raised-button color="accent" (click)="openSummaryModal()">
+        View Trip Summary
+      </button>
+    </div>
     <router-outlet></router-outlet>
   </main>
 </div>

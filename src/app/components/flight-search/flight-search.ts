@@ -8,6 +8,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SummaryModal } from '../summary-modal/summary-modal';
 import { MatDialog } from '@angular/material/dialog';
+import { TripStateService } from '../../global-state/trip-state.service';
 
 @Component({
   selector: 'app-flight-search',
@@ -27,7 +28,7 @@ export class FlightSearch implements OnInit {
   error = '';
   showContinueButton = false;
 
-  constructor(private flightService: FlightOffers, private http: HttpClient, private router: Router, private dialog: MatDialog, private route: ActivatedRoute) { }
+  constructor(private flightService: FlightOffers, private http: HttpClient, private router: Router, private dialog: MatDialog, private route: ActivatedRoute, private tripState: TripStateService) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -78,6 +79,7 @@ export class FlightSearch implements OnInit {
     }
     localStorage.setItem('travelSearchData', JSON.stringify(parsedData));
     console.log('➡ Uçuş seçmeden devam ediliyor:', parsedData);
+    this.tripState.checkSummaryVisibility();
 
     if (!parsedData.selectedHotel?.selected) {
       console.log('➡ Navigating to /hotels');
@@ -132,7 +134,7 @@ export class FlightSearch implements OnInit {
 
     localStorage.setItem('travelSearchData', JSON.stringify(parsedData));
     console.log('✅ Flight saved to LocalStorage:', parsedData);
-
+    this.tripState.checkSummaryVisibility();
     console.log('Hotel selected:', parsedData.selectedHotel?.selected);
     console.log('Flight selected:', parsedData.selectedFlight?.selected);
 

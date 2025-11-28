@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 import { CityService, City } from '../../services/city-search/cities';
 import { searchInterface } from '../../search.model';
 import { Router } from '@angular/router';
+import { TripStateService } from '../../global-state/trip-state.service';
 
 @Component({
   selector: 'app-search',
@@ -40,7 +41,7 @@ export class Search implements OnInit {
 
   showMoreDetails = false;
 
-  constructor(private cityService: CityService, private router: Router) { }
+  constructor(private cityService: CityService, private router: Router, private tripState: TripStateService) { }
 
   ngOnInit(): void {
     this.cityService.getCities().subscribe(data => {
@@ -142,6 +143,8 @@ export class Search implements OnInit {
 
     console.log('Data to be sent to API:', payload);
     localStorage.setItem('travelSearchData', JSON.stringify(payload));
+    this.tripState.checkSummaryVisibility();
+
     this.searchCompleted.emit();
     this.router.navigate(['/result']);
   }
