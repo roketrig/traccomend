@@ -10,7 +10,7 @@ describe('SummaryModal', () => {
     await TestBed.configureTestingModule({
       imports: [SummaryModal]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(SummaryModal);
     component = fixture.componentInstance;
