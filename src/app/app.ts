@@ -6,8 +6,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { SearchService } from './shared/search';
-import { Enter } from './enter/enter';
-
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -17,7 +15,7 @@ import { Enter } from './enter/enter';
     MatTabsModule,
     MatFormFieldModule,
     MatInputModule,
-    Enter
+
   ],
   templateUrl: './app.html',
   styleUrls: ['./app.css']
@@ -48,7 +46,6 @@ export class App {
 
 
   onTabChange(index: number) {
-    // Eğer summary gibi tab dışı bir sayfadaysak, yönlendirme yapma
     if (this.selectedTabIndex === -1) {
       console.log('✅ Tab dışı sayfa, yönlendirme yapılmadı.');
       return;
@@ -60,7 +57,6 @@ export class App {
       this.router.navigate([route]);
     }
 
-    // Animasyon hesaplama
     const tabCount = this.tabs.length;
     const navbarWidth = window.innerWidth;
     const step = navbarWidth / tabCount;
