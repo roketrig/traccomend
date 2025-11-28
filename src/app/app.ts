@@ -40,9 +40,9 @@ export class App {
 
 
   // plane offset.
-  planeX = '0px';
+  planeX = '320px';
   lineWidth = '0px';
-  lineOffset = '150px';
+  lineOffset = '320px';
 
 
   onTabChange(index: number) {
@@ -61,7 +61,7 @@ export class App {
     const navbarWidth = window.innerWidth;
     const step = navbarWidth / tabCount;
     const iconHalf = 20;
-    const offset = 148;
+    const offset = 318;
     const x = index * step + step / 2 - iconHalf;
     this.planeX = `${x}px`;
     this.lineWidth = `${x - offset > 0 ? x - offset : 0}px`;
