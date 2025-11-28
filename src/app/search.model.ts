@@ -10,6 +10,7 @@ export interface searchInterface {
     return_date: string,
 
     selectedFlight?: {
+        passed:boolean;
         selected:boolean;
         from: string;
         to: string;
@@ -18,6 +19,7 @@ export interface searchInterface {
     };
 
     selectedHotel?: {
+        passed:boolean;
         selected:boolean;
         name: string;
         nights: number;

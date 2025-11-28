@@ -8,6 +8,33 @@
   align-content: center;
 }
 
+.continue-without-flight {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.continue-without-flight button {
+  background-color: #1565c0; /* Material Blue */
+  color: #fff;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 50px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.continue-without-flight button:hover {
+  background-color: red; /* Darker blue on hover */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.continue-without-flight button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
 /* Header */
 .search-header {
   text-align: center;

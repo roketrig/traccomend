@@ -76,9 +76,9 @@ export class ResultComponent implements OnInit {
       console.log('Updated travelSearchData:', payload);
 
       if (type === 'hotels') {
-        this.router.navigate(['/hotels']);
+        this.router.navigate(['/hotels'], { queryParams: { from: 'result' } });
       } else {
-        this.router.navigate(['/flight-offers']);
+        this.router.navigate(['/flight-offers'], { queryParams: { from: 'result' } });
       }
     }
   }

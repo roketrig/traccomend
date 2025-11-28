@@ -123,6 +123,7 @@ export class Search implements OnInit {
       departure_date: this.departureDate,
       return_date: this.returnDate,
       selectedFlight: {
+        passed: false,
         selected: false,
         from: "",
         to: "",
@@ -130,6 +131,7 @@ export class Search implements OnInit {
         price: "",
       },
       selectedHotel: {
+        passed: false,
         selected: false,
         name: "",
         nights: 0,

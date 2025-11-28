@@ -6,7 +6,7 @@ import { SearchService } from '../../shared/search';
 import { MapComponent } from '../map-component/map-component';
 import { Search } from '../search/search';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { SummaryModal } from '../summary-modal/summary-modal';
 
@@ -25,18 +25,25 @@ export class HotelSearch implements OnInit {
   error = '';
   cityCode = '';
   showHotelSearch = false;
-  city = ''
-  IATACode = ""
-  targetedCity = ""
+  city = '';
+  IATACode = "";
+  targetedCity = "";
+  showContinueButton = false;
 
   constructor(
     private hotelService: TravelHotelSearch,
     private searchService: SearchService,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private route: ActivatedRoute
   ) { }
   // stored data = IATA code 
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      if (params['from'] === 'result' || params['from'] === "flight-offers") {
+        this.showContinueButton = true;
+      }
+    });
     this.searchService.cityCode$.subscribe(code => {
       const storedData = localStorage.getItem("travelSearchData");
       const parsedData = storedData ? JSON.parse(storedData) : null;
@@ -53,6 +60,30 @@ export class HotelSearch implements OnInit {
       width: '600px',
       height: 'auto'
     });
+  }
+
+   continueWithoutHotel() {
+    const storedData = localStorage.getItem('travelSearchData');
+    const parsedData = storedData ? JSON.parse(storedData) : {};
+
+    parsedData.selectedHotel = {
+      passed: true,
+      selected: true
+    };
+
+    localStorage.setItem('travelSearchData', JSON.stringify(parsedData));
+    console.log('➡ Uçuş seçmeden devam ediliyor:', parsedData);
+
+    if (!parsedData.selectedHotel?.selected) {
+      console.log('➡ Navigating to /hotels');
+      this.router.navigate(['/hotels'], { queryParams: { from: 'flight-offers' } });
+    } else if (!parsedData.selectedFlight?.selected) {
+      console.log('➡ Navigating to /flight-offers');
+      this.router.navigate(['/flight-offers'], { queryParams: { from: 'hotels' } });
+    } else {
+      console.log('➡ Navigating to /summary');
+      this.openSummaryModal();
+    }
   }
 
   searchHotels(cityCode: string) {

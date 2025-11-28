@@ -5,7 +5,7 @@ import { FlightOffers } from '../../services/flight-offers/flight-offers';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SummaryModal } from '../summary-modal/summary-modal';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -25,10 +25,17 @@ export class FlightSearch implements OnInit {
   flightOffers: any[] = [];
   isLoading = false;
   error = '';
+  showContinueButton = false;
 
-  constructor(private flightService: FlightOffers, private http: HttpClient, private router: Router, private dialog: MatDialog) { }
+  constructor(private flightService: FlightOffers, private http: HttpClient, private router: Router, private dialog: MatDialog, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      if (params['from'] === 'result' || params['from'] === "hotels") {
+        this.showContinueButton = true;
+      }
+    });
+
     const storedData = localStorage.getItem("travelSearchData");
     const parsedData = storedData ? JSON.parse(storedData) : null;
 
@@ -54,6 +61,34 @@ export class FlightSearch implements OnInit {
       width: '600px',
       height: 'auto'
     });
+  }
+
+  continueWithoutFlight() {
+    const storedData = localStorage.getItem('travelSearchData');
+    const parsedData = storedData ? JSON.parse(storedData) : {};
+
+    parsedData.selectedFlight = {
+      passed: true,
+      selected: true
+    };
+
+    // departure_date bilgisi varsa koru
+    if (!parsedData.departure_date) {
+      parsedData.departure_date = this.departureDate;
+    }
+    localStorage.setItem('travelSearchData', JSON.stringify(parsedData));
+    console.log('➡ Uçuş seçmeden devam ediliyor:', parsedData);
+
+    if (!parsedData.selectedHotel?.selected) {
+      console.log('➡ Navigating to /hotels');
+      this.router.navigate(['/hotels'], { queryParams: { from: 'flight-offers' } });
+    } else if (!parsedData.selectedFlight?.selected) {
+      console.log('➡ Navigating to /flight-offers');
+      this.router.navigate(['/flight-offers'], { queryParams: { from: 'hotels' } });
+    } else {
+      console.log('➡ Navigating to /summary');
+      this.openSummaryModal();
+    }
   }
 
 
@@ -92,6 +127,8 @@ export class FlightSearch implements OnInit {
       name: offer.itineraries[0]?.segments[0]?.carrierCode + " " + offer.itineraries[0]?.segments[0]?.number,
       price: offer.price?.total + " " + offer.price?.currency
     };
+
+    parsedData.departure_date = this.departureDate;
 
     localStorage.setItem('travelSearchData', JSON.stringify(parsedData));
     console.log('✅ Flight saved to LocalStorage:', parsedData);

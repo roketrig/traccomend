@@ -1,4 +1,11 @@
 <div class="hotel-search-container">
+
+  <div *ngIf="showContinueButton" class="continue-without-flight">
+    <button mat-raised-button color="primary" (click)="continueWithoutFlight()">
+      Continue Without Selecting a Flight
+    </button>
+  </div>
+
   <div class="search-header">
     <h1 class="search-title">✈️ Flight Offers</h1>
   </div>

@@ -1,4 +1,9 @@
 <div class="hotel-search-container">
+  <div *ngIf="showContinueButton" class="continue-without-flight">
+    <button mat-raised-button color="primary" (click)="continueWithoutHotel()">
+     Continue Without Selecting a Hotel
+    </button>
+  </div>
   <div class="max-w-6xl mx-auto px-4">
 
     <!-- Header -->
@@ -6,7 +11,7 @@
       <h1 class="search-title">🏨 Hotel finder</h1>
       <!--Hotel Button-->
       <input [(ngModel)]="cityCode" type="text" placeholder="{{ targetedCity }}" class="city-input">
-      <button 
+      <button
         class="bg-white text-blue-600 font-semibold px-4 py-2 rounded shadow hover:bg-blue-100 transition search-btn"
         (click)="searchHotels(cityCode); showHotelSearch = true">
         {{ isLoading ? '🔄 Processing...' : '🔍 Search Hotel Offers' }}
