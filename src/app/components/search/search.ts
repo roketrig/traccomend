@@ -138,6 +138,7 @@ export class Search implements OnInit {
         nights: 0,
         latitude: 0,
         longitude: 0,
+        address: ""
       }
     };
 

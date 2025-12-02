@@ -45,11 +45,11 @@
           </div>
           <div class="flex flex-col w-full md:w-1/2">
             <label for="endDate" class="font-semibold text-gray-700 mb-1">End Date</label>
-            <input id="endDate" type="date" [(ngModel)]="endDate"
+            <input id="endDate" type="date" [(ngModel)]="endDate" (change)="addedEndDate()"
               class="border rounded-lg px-3 py-2 focus:outline-none focus:border-indigo-500" />
           </div>
         </div>
-
+        <div *ngIf="nightInfo !== 0">{{ nightInfo }} Night(s)</div>
         <!-- Search Button -->
         <button
           class="bg-white text-blue-600 font-semibold px-4 py-2 rounded shadow hover:bg-blue-100 transition search-btn"

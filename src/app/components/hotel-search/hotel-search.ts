@@ -34,6 +34,7 @@ export class HotelSearch implements OnInit {
   IATACode = "";
   targetedCity = "";
   showContinueButton = false;
+  nightInfo = 0;
 
   startDate: string = '';
   endDate: string = '';
@@ -104,7 +105,6 @@ export class HotelSearch implements OnInit {
     });
   }
 
-
   displayCity(city: City | string): string {
     return typeof city === 'string' ? city : city?.city_name || '';
   }
@@ -150,9 +150,10 @@ export class HotelSearch implements OnInit {
     }
   }
 
-
-
   searchHotels() {
+    const storedData = localStorage.getItem('travelSearchData');
+    const parsedData = storedData ? JSON.parse(storedData) : {};
+
     if (!this.selectedHotelCity) {
       this.error = 'Please select a city for hotel search.';
       return;
@@ -190,6 +191,29 @@ export class HotelSearch implements OnInit {
         this.error = err.message || 'An error occurred while searching for hotels';
       }
     });
+    const start = new Date(this.startDate);
+    const end = new Date(this.endDate);
+    if (end > start) {
+      parsedData.return_date = this.endDate;
+      parsedData.departure_date = this.startDate;
+    }
+    localStorage.setItem('travelSearchData', JSON.stringify(parsedData));
+  }
+
+  addedEndDate() {
+    let nights = 0;
+    if (this.startDate && this.endDate) {
+      const start = new Date(this.startDate);
+      const end = new Date(this.endDate);
+
+      if (end >= start) {
+        const diff = end.getTime() - start.getTime();
+        nights = Math.ceil(diff / (1000 * 60 * 60 * 24));
+      } else {
+        nights = 0;
+      }
+    }
+    this.nightInfo = nights;
   }
 
 
@@ -222,8 +246,6 @@ export class HotelSearch implements OnInit {
     const storedData = localStorage.getItem('travelSearchData');
     const parsedData = storedData ? JSON.parse(storedData) : {};
 
-
-
     let nights = 1;
     if (this.startDate && this.endDate) {
       const start = new Date(this.startDate);
@@ -237,14 +259,15 @@ export class HotelSearch implements OnInit {
       const diff = end.getTime() - start.getTime();
       nights = diff > 0 ? Math.ceil(diff / (1000 * 60 * 60 * 24)) : 1;
     }
-
+    parsedData.return_date = this.endDate;
 
     parsedData.selectedHotel = {
       selected: true,
       name: hotel.name,
       nights: nights,
       latitude: hotel.latitude,
-      longitude: hotel.longitude
+      longitude: hotel.longitude,
+      address: hotel.address.lines.join(', ') + " " + hotel.address.cityName
     };
 
     localStorage.setItem('travelSearchData', JSON.stringify(parsedData));
@@ -253,7 +276,6 @@ export class HotelSearch implements OnInit {
 
     console.log('Hotel selected:', parsedData.selectedHotel?.selected);
     console.log('Flight selected:', parsedData.selectedFlight?.selected);
-
 
     if (!parsedData.selectedHotel?.selected) {
       console.log('➡ Navigating to /hotels');
@@ -265,7 +287,5 @@ export class HotelSearch implements OnInit {
       console.log('➡ Navigating to /summary');
       this.openSummaryModal();
     }
-
   }
-
 }

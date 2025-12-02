@@ -5,7 +5,7 @@
         <h3>Trip Details</h3>
         <p><strong>From:</strong> {{ summaryData.departure_city }} ({{ summaryData.departure_city_iata_code }})</p>
         <p><strong>To:</strong> {{ summaryData.target_city }} ({{ summaryData.target_city_iata_code }})</p>
-        <p><strong>Dates:</strong> {{ summaryData.departure_date }} → {{ summaryData.return_date }}</p>
+        <p><strong>Dates:</strong> {{ summaryData.departure_date }} → {{ summaryData.return_date || "You didn't entered return date :/" }}</p>
         <p><strong>Adults:</strong> {{ summaryData.adult }}</p>
     </mat-card>
 
@@ -20,8 +20,7 @@
         <h3>Hotel</h3>
         <p><strong>Name:</strong> {{ summaryData.selectedHotel.name }}</p>
         <p><strong>Nights:</strong> {{ summaryData.selectedHotel.nights }}</p>
-        <p><strong>Location:</strong> City: {{ summaryData.selectedFlight.to }}, Lat: {{
-            summaryData.selectedHotel.latitude }}, Lng: {{ summaryData.selectedHotel.longitude }}</p>
+        <p><strong>Address:</strong>  {{ summaryData.selectedHotel.address }}</p>
     </mat-card>
 </div>
 
