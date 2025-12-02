@@ -1,20 +1,24 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TravelHotelSearch } from '../../services/travel-hotel-search/travel-hotel-search';
 import { SearchService } from '../../shared/search';
 import { MapComponent } from '../map-component/map-component';
-import { Search } from '../search/search';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { SummaryModal } from '../summary-modal/summary-modal';
 import { TripStateService } from '../../global-state/trip-state.service';
 
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { map, Observable, startWith } from 'rxjs';
+import { City, CityService } from '../../services/city-search/cities';
+
 @Component({
   selector: 'app-hotel-search',
   standalone: true,
-  imports: [CommonModule, FormsModule, MapComponent, MatFormFieldModule],
+  imports: [CommonModule, FormsModule, MapComponent, MatFormFieldModule, MatInputModule, MatAutocompleteModule, ReactiveFormsModule],
   templateUrl: './hotel-search.html',
   styleUrls: ['./hotel-search.css']
 })
@@ -31,30 +35,83 @@ export class HotelSearch implements OnInit {
   targetedCity = "";
   showContinueButton = false;
 
+  startDate: string = '';
+  endDate: string = '';
+  showDateInputs = false;
+
+  // Autocomplete için
+  hotelCityControl = new FormControl('');
+  filteredHotelCities!: Observable<City[]>;
+  selectedHotelCity: City | null = null;
+  cities: City[] = [];
+
   constructor(
     private hotelService: TravelHotelSearch,
     private searchService: SearchService,
+    private cityService: CityService,
     private router: Router,
     private dialog: MatDialog,
     private route: ActivatedRoute,
     private tripState: TripStateService
   ) { }
   // stored data = IATA code 
+
+
+
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      if (params['from'] === 'result' || params['from'] === "flight-offers") {
+      if (params['from'] === 'result' || params['from'] === 'flight-offers') {
         this.showContinueButton = true;
       }
-    });
-    this.searchService.cityCode$.subscribe(code => {
-      const storedData = localStorage.getItem("travelSearchData");
+
+      const storedData = localStorage.getItem('travelSearchData');
       const parsedData = storedData ? JSON.parse(storedData) : null;
+
       if (parsedData) {
-        const iataCode = parsedData.target_city_iata_code;
-        this.cityCode = iataCode;
-        this.targetedCity = parsedData.target_city_targetedCity
+        this.endDate = parsedData.return_date;
+        this.startDate = parsedData.departure_date;
       }
+
+      // Şehir listesini yükle
+      this.cityService.getCities().subscribe(data => {
+        this.cities = data;
+
+        this.filteredHotelCities = this.hotelCityControl.valueChanges.pipe(
+          startWith(''),
+          map(value => typeof value === 'string' ? value.trim().toLowerCase() : ''),
+          map(keyword => this.cities.filter(city =>
+            city.city_name.toLowerCase().includes(keyword)
+          ))
+        );
+
+        // Eğer önceden seçilmiş şehir varsa inputa yaz ve seçili hale getir
+        if (parsedData?.target_city) {
+          this.hotelCityControl.setValue(parsedData.target_city);
+
+          const matchedCity = this.cities.find(c =>
+            c.city_name.toLowerCase() === parsedData.target_city.toLowerCase()
+          );
+          if (matchedCity) {
+            this.selectedHotelCity = matchedCity;
+
+            // ✅ Eğer result'tan geldiyse otomatik otel araması başlat
+            if (params['from'] === 'result') {
+              this.searchHotels();
+            }
+          }
+        }
+      });
     });
+  }
+
+
+  displayCity(city: City | string): string {
+    return typeof city === 'string' ? city : city?.city_name || '';
+  }
+
+  onHotelCitySelected(city: City): void {
+    this.selectedHotelCity = city;
+    console.log('Selected city for hotel search:', city.city_name);
   }
 
   openSummaryModal() {
@@ -62,6 +119,10 @@ export class HotelSearch implements OnInit {
       width: '600px',
       height: 'auto'
     });
+  }
+
+  toggleDateInputs() {
+    this.showDateInputs = !this.showDateInputs;
   }
 
   continueWithoutHotel() {
@@ -89,25 +150,38 @@ export class HotelSearch implements OnInit {
     }
   }
 
-  searchHotels(cityCode: string) {
-    this.cityCode = cityCode.toUpperCase();
+
+
+  searchHotels() {
+    if (!this.selectedHotelCity) {
+      this.error = 'Please select a city for hotel search.';
+      return;
+    }
+
+    const iataCode = this.selectedHotelCity.city_iata_code;
     this.isLoading = true;
     this.error = '';
     this.hotels = [];
 
-
-    this.hotelService.searchHotelsByCity(this.cityCode).subscribe({
+    this.hotelService.searchHotelsByCity(iataCode).subscribe({
       next: (res: any) => {
         const raw = res.data ?? [];
         this.hotels = raw.map((item: any) => ({
           name: item.name ?? 'Unknown Hotel',
           hotelId: item.hotelId ?? 'N/A',
-          dupeId: item.dupeId ?? null,
           chainCode: item.chainCode ?? null,
-          cityCode: item.address?.cityCode ?? this.cityCode,
           latitude: item.geoCode?.latitude ?? null,
           longitude: item.geoCode?.longitude ?? null,
-          type: item.type || 'hotel'
+          address: {
+            cityName: item.address?.cityName ?? 'N/A',
+            countryCode: item.address?.countryCode ?? 'N/A',
+            postalCode: item.address?.postalCode ?? 'N/A',
+            lines: item.address?.lines ?? []
+          },
+          distance: {
+            unit: item.distance?.unit,
+            value: item.distance?.value
+          }
         }));
         this.isLoading = false;
       },
@@ -116,6 +190,23 @@ export class HotelSearch implements OnInit {
         this.error = err.message || 'An error occurred while searching for hotels';
       }
     });
+  }
+
+
+  getSegment(chainCode: string): string {
+    const luxuryChains = ['HH', 'HY', 'MR', 'RC', 'FS', 'HN', 'RT', 'LX', 'DH', 'AC', 'EU'];
+    // Hilton, Hyatt, Marriott, Ritz Carlton, Four Seasons, HN, RT, LX, DH, AC, EU gibi lüks zincirler
+
+    const midChains = ['BW', 'CP', 'NN', 'YX', 'HI', 'AZ', 'MC', 'OI', 'VP', 'XL'];
+    // Best Western, Crowne Plaza, Campanile, Holiday Inn, vb. + VP, XL
+
+    const budgetChains = ['IB', 'ET', 'ZZ', 'GT'];
+    // Ibis, Etap, vb. + GT
+
+    if (luxuryChains.includes(chainCode)) return 'Luxury';
+    if (midChains.includes(chainCode)) return 'Mid-range';
+    if (budgetChains.includes(chainCode)) return 'Budget';
+    return 'Independent';
   }
 
   hotelLocation(lat: number, lng: number) {
@@ -131,13 +222,22 @@ export class HotelSearch implements OnInit {
     const storedData = localStorage.getItem('travelSearchData');
     const parsedData = storedData ? JSON.parse(storedData) : {};
 
+
+
     let nights = 1;
-    if (parsedData.departure_date && parsedData.return_date) {
+    if (this.startDate && this.endDate) {
+      const start = new Date(this.startDate);
+      const end = new Date(this.endDate);
+      const diff = end.getTime() - start.getTime();
+      parsedData.return_date = this.endDate;
+      nights = diff > 0 ? Math.ceil(diff / (1000 * 60 * 60 * 24)) : 1;
+    } else if (parsedData.departure_date && parsedData.return_date) {
       const start = new Date(parsedData.departure_date);
       const end = new Date(parsedData.return_date);
       const diff = end.getTime() - start.getTime();
       nights = diff > 0 ? Math.ceil(diff / (1000 * 60 * 60 * 24)) : 1;
     }
+
 
     parsedData.selectedHotel = {
       selected: true,

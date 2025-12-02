@@ -69,14 +69,14 @@ svg.w-10.h-10 {
 
 .summary-button-container {
   position: fixed;
-  top: 20%;
-  left: 50px; 
+  bottom: 5%;
+  right: 5%; 
   transform: translateY(-50%);
   z-index: 1000; /* Üstte kalması için */
 }
 
 .summary-button-container button {
-  background-color: #8e24aa;
+  background-color: #c8a7d1;
   color: #fff;
   font-weight: 600;
   padding: 24px 24px;

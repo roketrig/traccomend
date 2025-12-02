@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { NgxMapLibreGLModule } from '@maplibre/ngx-maplibre-gl';
 
 @Component({
@@ -8,20 +9,25 @@ import { NgxMapLibreGLModule } from '@maplibre/ngx-maplibre-gl';
   templateUrl: './map-component.html',
   styleUrls: ['./map-component.css']
 })
-export class MapComponent {
-  static updateLocation(lng: number, lat: number) {
-    throw new Error('Method not implemented.');
+export class MapComponent implements OnChanges {
+
+  @Input() latitude!: number;
+  @Input() longitude!: number;
+
+  mapStyle = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';
+  center: [number, number] = [32.8597, 39.9334]; // Default center
+  zoom: [number] = [12]; // Daha yakın zoom
+
+  markerLngLat: [number, number] = [28.9784, 41.0082]; // Default marker
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['latitude'] && changes['longitude']) {
+      this.updateLocation(this.longitude, this.latitude);
+    }
   }
-mapStyle = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';
-center: [number, number] = [32.8597, 39.9334];
-zoom: [number] = [4];
 
-markerLngLat: [number, number] = [28.9784, 41.0082];
-
-updateLocation(lng: number, lat: number) {
-  this.markerLngLat = [lng, lat];
-  this.center = [lng, lat];
+  updateLocation(lng: number, lat: number) {
+    this.markerLngLat = [lng, lat];
+    this.center = [lng, lat];
+  }
 }
-}
-
-

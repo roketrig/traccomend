@@ -1,21 +1,62 @@
 <div class="hotel-search-container">
+  <!-- Continue Without Hotel -->
   <div *ngIf="showContinueButton" class="continue-without-flight">
     <button mat-raised-button color="primary" (click)="continueWithoutHotel()">
-     Continue Without Selecting a Hotel
+      Continue Without Selecting a Hotel
     </button>
   </div>
-  <div class="max-w-6xl mx-auto px-4">
 
+  <div class="max-w-6xl mx-auto px-4">
     <!-- Header -->
     <div class="search-header">
-      <h1 class="search-title">🏨 Hotel finder</h1>
-      <!--Hotel Button-->
-      <input [(ngModel)]="cityCode" type="text" placeholder="{{ targetedCity }}" class="city-input">
-      <button
-        class="bg-white text-blue-600 font-semibold px-4 py-2 rounded shadow hover:bg-blue-100 transition search-btn"
-        (click)="searchHotels(cityCode); showHotelSearch = true">
-        {{ isLoading ? '🔄 Processing...' : '🔍 Search Hotel Offers' }}
-      </button>
+      <h1 class="search-title">🏨 Hotel Finder</h1>
+
+      <div
+        class="search-header flex flex-col items-center gap-4 bg-white rounded-xl shadow-lg p-6 py-10 max-w-3xl mx-auto">
+        <!-- Autocomplete ile şehir seçimi -->
+
+        <mat-form-field appearance="fill" class="w-full md:w-2/3">
+          <mat-label>Hotel City</mat-label>
+          <input type="text" matInput [formControl]="hotelCityControl" [matAutocomplete]="autoHotel"
+            placeholder="Type city name..."
+            class="px-4 py-3 border rounded-lg focus:outline-none focus:border-indigo-500">
+          <mat-autocomplete #autoHotel="matAutocomplete" [displayWith]="displayCity"
+            (optionSelected)="onHotelCitySelected($event.option.value)">
+            <mat-option *ngFor="let city of filteredHotelCities | async" [value]="city">
+              {{ city.city_name }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
+
+        <!-- Enter Dates Butonu -->
+        <button
+          class="bg-gray-100 text-indigo-600 font-semibold px-5 py-3 rounded-lg shadow hover:bg-gray-200 transition"
+          (click)="toggleDateInputs()">
+          📅 Enter Dates
+        </button>
+
+        <!-- Tarih Alanları -->
+        <div *ngIf="showDateInputs" class="flex flex-col md:flex-row gap-4 w-full mt-4">
+          <div class="flex flex-col w-full md:w-1/2">
+            <label for="startDate" class="font-semibold text-gray-700 mb-1">Start Date</label>
+            <input id="startDate" type="date" [(ngModel)]="startDate"
+              class="border rounded-lg px-3 py-2 focus:outline-none focus:border-indigo-500" />
+          </div>
+          <div class="flex flex-col w-full md:w-1/2">
+            <label for="endDate" class="font-semibold text-gray-700 mb-1">End Date</label>
+            <input id="endDate" type="date" [(ngModel)]="endDate"
+              class="border rounded-lg px-3 py-2 focus:outline-none focus:border-indigo-500" />
+          </div>
+        </div>
+
+        <!-- Search Button -->
+        <button
+          class="bg-white text-blue-600 font-semibold px-4 py-2 rounded shadow hover:bg-blue-100 transition search-btn"
+          (click)="searchHotels(); showHotelSearch = true">
+          {{ isLoading ? '🔄 Processing...' : '🔍 Search Hotel Offers' }}
+        </button>
+      </div>
     </div>
 
     <!-- Loading State -->
@@ -31,48 +72,33 @@
     </div>
 
     <!-- Results -->
-    <div *ngIf="!isLoading && hotels.length > 12" class="results-container">
+    <div *ngIf="!isLoading && hotels.length > 0" class="results-container">
       <h3 class="results-title">
         {{ cityCode }} City Hotels Found
         <span class="results-count">{{ hotels.length }}</span>
       </h3>
-      <!-- Hotel-grid -->
+
+      <!-- Hotel Grid -->
       <div class="hotels-grid">
-        <div *ngFor="let h of hotels.slice(0, 12); let i = index" class="hotel-card">
+        <div *ngFor="let h of hotels.slice(250, 265); let i = index" class="hotel-card">
           <h3 class="hotel-name">{{ i + 1 }}. {{ h.name }}</h3>
 
           <div class="hotel-details">
-            <div class="detail-item">
-              <span class="detail-label">🏷️ Hotel ID:</span>
-              <span class="detail-value">{{ h.hotelId }}</span>
-            </div>
-            <div class="detail-item">
-              <span class="detail-label">🔗 Dupe ID:</span>
-              <span class="detail-value">{{ h.dupeId || 'N/A' }}</span>
-            </div>
-            <div class="detail-item">
-              <span class="detail-label">🏢 Chain:</span>
-              <span class="detail-value">{{ h.chainCode || 'N/A' }}</span>
-            </div>
-            <div class="detail-item">
-              <span class="detail-label">🏙️ City:</span>
-              <span class="detail-value">{{ h.cityCode || 'N/A' }}</span>
-            </div>
-            <div class="detail-item">
-              <span class="detail-label">📍 Latitude:</span>
-              <span class="detail-value">{{ h.latitude || 'N/A' }}</span>
-            </div>
-            <div class="detail-item">
-              <span class="detail-label">📍 Longitude:</span>
-              <span class="detail-value">{{ h.longitude || 'N/A' }}</span>
-            </div>
-            <button (click)="selectHotel(h)" (click)="hotelLocation(h.latitude, h.longitude)">📍 Select</button>
+            <p>🏢 Segment: <strong>{{ getSegment(h.chainCode) }} {{"(" + h.chainCode + ")" || 'N/A'}}</strong></p>
+            <p>
+              📏 Distance:
+              {{ h.distance?.value || 'N/A' }}
+              {{ h.distance?.unit || 'N/A' }} from city center
+            </p>
+            <p>📍 Address: {{ h.address.lines.join(', ') }}, {{ h.address.cityName }} {{ h.address.postalCode }}</p>
 
+            <!-- Harita -->
+            <app-map [latitude]="h.latitude" [longitude]="h.longitude"></app-map>
+
+            <button class="select-btn" (click)="selectHotel(h)">✅ Select Hotel</button>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <!-- Map -->
-  <app-map></app-map>
 </div>
