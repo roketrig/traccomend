@@ -11,10 +11,8 @@
     <div class="search-header">
       <h1 class="search-title">🏨 Hotel Finder</h1>
 
-      <div
-        class="search-header flex flex-col items-center gap-4 bg-white rounded-xl shadow-lg p-6 py-10 max-w-3xl mx-auto">
-        <!-- Autocomplete ile şehir seçimi -->
-
+      <div class="search-header flex flex-col items-center gap-4 rounded-xl shadow-lg p-6 py-10 max-w-3xl mx-auto"
+        style="background:#f1f5f9;">
         <mat-form-field appearance="fill" class="w-full md:w-2/3">
           <mat-label>Hotel City</mat-label>
           <input type="text" matInput [formControl]="hotelCityControl" [matAutocomplete]="autoHotel"

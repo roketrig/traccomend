@@ -1,13 +1,18 @@
+
 /* Ana container */
 .hotel-search-container {
   min-height: 100vh;
-  background: url("../../../../public//assets/flight_background.jpg") center fixed;
-  padding: 2rem 0;
-   background-repeat: no-repeat;
+  background: url("../../../../public/assets/flight_background.jpg") center fixed;
+  background-repeat: no-repeat;
   background-size: cover;
-  align-content: center;
+  padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
+/* Continue Without Flight */
 .continue-without-flight {
   display: flex;
   justify-content: center;
@@ -15,7 +20,7 @@
 }
 
 .continue-without-flight button {
-  background-color: #1565c0; /* Material Blue */
+  background-color: #1565c0;
   color: #fff;
   font-weight: 600;
   padding: 12px 24px;
@@ -25,7 +30,7 @@
 }
 
 .continue-without-flight button:hover {
-  background-color: red; /* Darker blue on hover */
+  background-color: red;
   transform: translateY(-2px);
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
@@ -38,11 +43,11 @@
 /* Header */
 .search-header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 .search-title {
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 800;
   color: white;
   margin-bottom: 0.5rem;
@@ -50,22 +55,25 @@
 }
 
 .search-subtitle {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   color: rgba(255, 255, 255, 0.9);
   font-weight: 300;
 }
 
-/* Arama kartı */
+
 .search-card {
-  background: white;
+  background: #f1f5f9; /* Sabit renk */
   border-radius: 20px;
-  padding: 2.5rem;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
-  margin-bottom: 2rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 2rem;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  border: 1px solid #e2e8f0; /* Daha belirgin kenar */
+  width: 90%;
+  max-width: 600px;
+  margin: 0 auto 2rem;
 }
 
+
+/* Input */
 .search-input-group {
   margin-bottom: 1.5rem;
 }
@@ -80,10 +88,10 @@
 
 .city-input {
   width: 100%;
-  padding: 1rem 1.5rem;
+  padding: 0.9rem 1.2rem;
   border: 2px solid #e2e8f0;
   border-radius: 12px;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 500;
   text-transform: uppercase;
   transition: all 0.3s ease;
@@ -112,16 +120,16 @@
 .search-btn {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  padding: 1rem 2rem;
+  padding: 0.9rem 2rem;
   border: none;
   border-radius: 12px;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-  display: inline-block;
-  /* Ortalanabilmesi için */
+  display: block;
+  width: 100%;
 }
 
 .search-btn:hover:not(:disabled) {
@@ -156,13 +164,8 @@
 }
 
 @keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .loading-text {
@@ -192,16 +195,19 @@
   margin: 0;
 }
 
-/* Sonuçlar */
+/* ✅ Results Container (Eski geniş hali) */
 .results-container {
   background: white;
   border-radius: 20px;
-  padding: 2rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 3rem; /* Daha geniş padding */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  width: 95%; /* Geniş görünüm */
+  max-width: 1200px; /* Büyük ekranlarda geniş */
+  margin: 2rem auto;
 }
 
 .results-title {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: 700;
   color: #2d3748;
   margin-bottom: 1.5rem;
@@ -307,11 +313,16 @@
   }
 
   .search-card {
-    padding: 1.5rem;
+    padding: 1.2rem;
     margin: 0 1rem;
   }
 
-  .hotels-grid {
+  .results-container {
+    padding: 1.5rem;
+    width: 95%;
+  }
+
+   .hotels-grid {
     grid-template-columns: 1fr;
   }
 
