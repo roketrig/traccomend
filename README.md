@@ -1,5 +1,5 @@
 
-# ✈️ Traccommend — Travel Recommendation App
+# ✈️ Traccommend 
 
 **Traccommend** is an Angular-based web application integrated with **Amadeus API for Developers**. It allows users to share a sample trip and receive **personalized destination recommendations**, along with flight and hotel offers.
 
@@ -26,7 +26,7 @@
 ---
 
 ## 🧰 Tech Stack
-- Angular 17+
+- Angular 20+
 - Angular Material
 - Tailwind CSS
 - RxJS
@@ -63,4 +63,4 @@ You can view the board here:
 ---
 
 ## 🎥 Video
-[▶ Video](https://github.com/roketrig/traccommend/blob/main/public/assets/readme/traccommend)
+[▶ Link](https://github.com/roketrig/traccommend/blob/main/public/assets/readme/traccommend)
