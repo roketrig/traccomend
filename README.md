@@ -1,59 +1,66 @@
-# Traccomend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.4.
+# ✈️ Traccommend 
 
-## Development server
+**Traccommend** is an Angular-based web application integrated with **Amadeus API for Developers**. It allows users to share a sample trip and receive **personalized destination recommendations**, along with flight and hotel offers.
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
-```
+## 🚀 Features
+- **Amadeus API Integration** for travel data
+- **Travel Recommendation Page**:
+  - Collects user input: Destination City, Departure City, Origin Country
+  - Optional details: Departure Date, Return Date, Number of Adults
+- **Dynamic Recommendations**:
+  - Suggested destinations based on user input
+- **Flight Offers**:
+  - After selecting a recommendation, user can view flight offers
+  - Displays airline name, origin, destination, and price
+- **Hotel Search**:
+  - Search hotels near selected destination
+  - Shows hotel name, segment, distance, address
+  - Includes **mini map** for location preview
+- **Summary Screen**:
+  - Displays all selected details
+  - Option to **download as PDF**
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 🧰 Tech Stack
+- Angular 20+
+- Angular Material
+- Tailwind CSS
+- RxJS
+- **Amadeus API for Developers**
+- MapLibre 
+- PDF generation for summary
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+---
 
-```bash
-ng generate component component-name
-```
+## 📋 Project Management
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+We organize our workflow and tasks using **Trello**.  
+You can view the board here:  
+[🔗 Trello Board](https://trello.com/b/47o79Hlz/traccomend)
 
-```bash
-ng generate --help
-```
 
-## Building
+## 📸 Gallery
+<details>
+  <summary>Click to expand the gallery</summary>
 
-To build the project run:
+  <br />
 
-```bash
-ng build
-```
+  <img width="100%" alt="hotel2" src="https://github.com/user-attachments/assets/905666fd-2f74-487d-8bbe-2af4394b41cb" />
+  <img width="100%" alt="hotel" src="https://github.com/user-attachments/assets/4b051ccc-401a-4167-b5dc-2a439516a77e" />
+  <img width="100%" alt="flightoffers2" src="https://github.com/user-attachments/assets/db2ee548-039b-4963-b671-2f5877a7107c" />
+  <img width="100%" alt="travel recommendation3" src="https://github.com/user-attachments/assets/b0588397-35d4-4306-9db1-4fa0a8265480" />
+  <img width="100%" alt="travel recommendation2" src="https://github.com/user-attachments/assets/b0a68c89-1134-4045-af66-9b029744e352" />
+  <img width="100%" alt="flightoffers" src="https://github.com/user-attachments/assets/3ba17fd1-7ab6-4989-b4d1-e00aa16b1be2" />
+  <img width="100%" alt="travel recommendation" src="https://github.com/user-attachments/assets/46f6df03-6dfa-4ee9-9eab-e341ced047b8" />
+  <img width="100%" alt="pdf" src="https://github.com/user-attachments/assets/2456ed3a-67ce-4f59-8159-fd5b1c4b6ece" />
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+</details>
 
-## Running unit tests
+---
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 🎥 Video
+[▶ Link](https://github.com/roketrig/traccomend/blob/main/public/assets/readme/traccomend.mp4)
