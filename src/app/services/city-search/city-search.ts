@@ -12,7 +12,6 @@ export class CitySearch {
 
   private baseUrl = 'https://test.api.amadeus.com/v1';
 
-  //şehir araması için 
   getCity(keyword: string): Observable<any> {
     return this.authService.ensureToken().pipe(
       switchMap(token => {

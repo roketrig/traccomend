@@ -23,8 +23,6 @@ export class TravelRecommendations {
         const params = new HttpParams()
           .set('cityCode', cityCode)
           .set('countryCode', countryCode);
-
-        // Bu endpoint'i Amadeus API'ye göre güncellemen gerekebilir
         return this.http.get(`${this.baseUrl}/reference-data/recommended-locations`, {
           headers,
           params

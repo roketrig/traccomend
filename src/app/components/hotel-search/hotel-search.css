@@ -1,4 +1,3 @@
-/* Ana container */
 .hotel-search-container {
   background: url("../../../../public/assets/hotel_background.jpg") center fixed;
   background-repeat: no-repeat;
@@ -8,7 +7,6 @@
   min-height: 100vh;
 }
 
-/* Continue Without Flight */
 .continue-without-flight {
   display: flex;
   justify-content: center;
@@ -50,7 +48,6 @@
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* Arama kartı */
 .search-card {
   background: #f1f5f9;
   border-radius: 20px;
@@ -62,7 +59,6 @@
   margin: 0 auto 2rem;
 }
 
-/* Buton */
 .search-btn {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
@@ -123,7 +119,6 @@
   font-weight: 500;
 }
 
-/* Hata mesajı */
 .error-container {
   background: #fed7d7;
   border: 1px solid #feb2b2;
@@ -170,7 +165,6 @@
   margin-left: 0.5rem;
 }
 
-/* Otel kartları */
 .hotels-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));

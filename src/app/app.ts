@@ -39,8 +39,6 @@ export class App {
     this.tripState.summaryVisible$.subscribe(visible => {
       this.showSummaryButton = visible;
     });
-
-    // İlk kontrol
     this.tripState.checkSummaryVisibility();
   }
 
@@ -56,10 +54,8 @@ export class App {
   get selectedTabIndex(): number {
     const url = this.router.url;
     const idx = this.tabs.findIndex(tab => url.startsWith(tab.route));
-    return idx >= 0 ? idx : -1; // -1: tab dışı sayfa (ör. summary)
+    return idx >= 0 ? idx : -1; 
   }
-
-
   // plane offset.
   planeX = '320px';
   lineWidth = '0px';

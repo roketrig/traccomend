@@ -40,7 +40,6 @@ export class HotelSearch implements OnInit {
   endDate: string = '';
   showDateInputs = false;
 
-  // Autocomplete için
   hotelCityControl = new FormControl('');
   filteredHotelCities!: Observable<City[]>;
   selectedHotelCity: City | null = null;
@@ -55,10 +54,9 @@ export class HotelSearch implements OnInit {
     private route: ActivatedRoute,
     private tripState: TripStateService
   ) { }
+
+
   // stored data = IATA code 
-
-
-
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       if (params['from'] === 'result' || params['from'] === 'flight-offers') {
@@ -73,7 +71,6 @@ export class HotelSearch implements OnInit {
         this.startDate = parsedData.departure_date;
       }
 
-      // Şehir listesini yükle
       this.cityService.getCities().subscribe(data => {
         this.cities = data;
 
@@ -85,7 +82,6 @@ export class HotelSearch implements OnInit {
           ))
         );
 
-        // Eğer önceden seçilmiş şehir varsa inputa yaz ve seçili hale getir
         if (parsedData?.target_city) {
           this.hotelCityControl.setValue(parsedData.target_city);
 
@@ -95,7 +91,6 @@ export class HotelSearch implements OnInit {
           if (matchedCity) {
             this.selectedHotelCity = matchedCity;
 
-            // ✅ Eğer result'tan geldiyse otomatik otel araması başlat
             if (params['from'] === 'result') {
               this.searchHotels();
             }

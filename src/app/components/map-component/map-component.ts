@@ -15,10 +15,10 @@ export class MapComponent implements OnChanges {
   @Input() longitude!: number;
 
   mapStyle = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';
-  center: [number, number] = [32.8597, 39.9334]; // Default center
-  zoom: [number] = [12]; // Daha yakın zoom
+  center: [number, number] = [32.8597, 39.9334]; 
+  zoom: [number] = [12]; 
 
-  markerLngLat: [number, number] = [28.9784, 41.0082]; // Default marker
+  markerLngLat: [number, number] = [28.9784, 41.0082]; 
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['latitude'] && changes['longitude']) {

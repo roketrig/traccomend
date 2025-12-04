@@ -73,7 +73,6 @@ export class FlightSearch implements OnInit {
       selected: true
     };
 
-    // departure_date bilgisi varsa koru
     if (!parsedData.departure_date) {
       parsedData.departure_date = this.departureDate;
     }

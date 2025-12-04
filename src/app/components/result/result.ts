@@ -48,7 +48,7 @@ export class ResultComponent implements OnInit {
       if (city && country) {
         this.travelService.getRecommendations(city.slice(0, 3).toUpperCase(), country.toUpperCase()).subscribe({
           next: (data) => {
-            this.recommendations = data.data; // API response formatına göre
+            this.recommendations = data.data; 
           },
           error: (err) => {
             console.error('API hatası:', err);

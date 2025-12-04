@@ -9,7 +9,6 @@ import { environment } from "../../environments/environment"
 export class AuthService {
   private http = inject(HttpClient);
 
-  // Environment'dan alıyoruz
   private clientId = environment.amadeus.clientId;
   private clientSecret = environment.amadeus.clientSecret;
   private tokenUrl = environment.amadeus.tokenUrl;
