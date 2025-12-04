@@ -63,4 +63,4 @@ You can view the board here:
 ---
 
 ## 🎥 Video
-[▶ Link](https://github.com/roketrig/traccommend/blob/main/public/assets/readme/traccommend)
+[▶ Link](https://github.com/roketrig/traccomend/blob/main/public/assets/readme/traccomend.mp4)
