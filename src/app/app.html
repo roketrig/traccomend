@@ -3,7 +3,7 @@
 
     <a class="logo m-4">Traccomend</a>
 
-    <div class="absolute top-1/2 -translate-y-1/2 h-1 bg-gray-300 transition-all duration-500" [style.width]="lineWidth"
+    <div class="absolute top-1/2 -translate-y-1/2 h-1 bg-gray-300 transition-all duration-500 line" [style.width]="lineWidth"
       [style.left]="lineOffset">
     </div>
 
@@ -12,6 +12,8 @@
         <path d="M2.5 19.5L21.5 12L2.5 4.5L2.5 10L15.5 12L2.5 14Z" />
       </svg>
     </div>
+
+
   </nav>
   <header class="bg-gray-100 p-2 shadow-lg">
     <mat-tab-group [selectedIndex]="selectedTabIndex" (selectedIndexChange)="onTabChange($event)">

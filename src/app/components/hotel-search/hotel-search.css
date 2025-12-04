@@ -1,6 +1,6 @@
 /* Ana container */
 .hotel-search-container {
-  background: url("../../../../public//assets/hotel_background.jpg") center fixed;
+  background: url("../../../../public/assets/hotel_background.jpg") center fixed;
   background-repeat: no-repeat;
   background-size: cover;
   align-content: center;
@@ -8,6 +8,7 @@
   min-height: 100vh;
 }
 
+/* Continue Without Flight */
 .continue-without-flight {
   display: flex;
   justify-content: center;
@@ -15,7 +16,7 @@
 }
 
 .continue-without-flight button {
-  background-color: #1565c0; /* Material Blue */
+  background-color: #1565c0;
   color: #fff;
   font-weight: 600;
   padding: 12px 24px;
@@ -25,7 +26,7 @@
 }
 
 .continue-without-flight button:hover {
-  background-color: red; /* Darker blue on hover */
+  background-color: red;
   transform: translateY(-2px);
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
@@ -34,7 +35,6 @@
   transform: translateY(0);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-
 
 /* Header */
 .search-header {
@@ -50,63 +50,16 @@
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.search-subtitle {
-  font-size: 1.25rem;
-  color: rgba(255, 255, 255, 0.9);
-  font-weight: 300;
-}
-
 /* Arama kartı */
 .search-card {
-  background: white;
+  background: #f1f5f9;
   border-radius: 20px;
-  padding: 2.5rem;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
-  margin-bottom: 2rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
+  padding: 2rem;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  border: 1px solid #e2e8f0;
 
-.search-input-group {
-  margin-bottom: 1.5rem;
-}
-
-.input-label {
-  display: block;
-  font-weight: 600;
-  color: #2d3748;
-  margin-bottom: 0.5rem;
-  font-size: 1.1rem;
-}
-
-.city-input {
-  width: 20%;
-  padding: 1rem 1.5rem;
-  border: 2px solid #e2e8f0;
-  border-radius: 12px;
-  font-size: 1.1rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  transition: all 0.3s ease;
-  background: white;
-}
-
-.city-input:focus {
-  outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-  transform: translateY(-2px);
-}
-
-.city-input::placeholder {
-  text-transform: none;
-  color: #a0aec0;
-}
-
-.input-hint {
-  margin-top: 0.5rem;
-  font-size: 0.9rem;
-  color: #718096;
+  max-width: 600px;
+  margin: 0 auto 2rem;
 }
 
 /* Buton */
@@ -225,13 +178,12 @@
   margin-top: 1.5rem;
 }
 
-
 .hotel-card {
-background-color: #f1f5f9 !important;
+  background-color: #f1f5f9 !important;
   border: 1px solid #e2e8f0;
   border-radius: 16px;
   padding: 1.5rem;
-   transition: all 0.3s ease;
+  transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
 }
@@ -251,7 +203,16 @@ background-color: #f1f5f9 !important;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
   border-color: #667eea;
 }
+.hotel-address {
 
+  margin-bottom: 1rem;      
+  white-space: nowrap;      
+  overflow: hidden;          
+  text-overflow: ellipsis;   
+  display: block;
+  max-width: 100%; 
+
+}
 .hotel-name {
   font-size: 1.3rem;
   font-weight: 700;
@@ -265,40 +226,6 @@ background-color: #f1f5f9 !important;
   gap: 0.5rem;
 }
 
-.detail-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid #f7fafc;
-}
-
-.detail-label {
-  font-weight: 600;
-  color: #4a5568;
-  font-size: 0.9rem;
-}
-
-.detail-value {
-  color: #2d3748;
-  font-weight: 500;
-  font-size: 0.9rem;
-}
-
-/* Boş state */
-.empty-state {
-  background: white;
-  border-radius: 20px;
-  padding: 3rem;
-  text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-.empty-text {
-  font-size: 1.1rem;
-  color: #718096;
-  margin: 0;
-}
 
 /* Responsive */
 @media (max-width: 768px) {
@@ -318,5 +245,4 @@ background-color: #f1f5f9 !important;
   .hotel-card {
     margin: 0 0.5rem;
   }
-
 }

@@ -29,7 +29,7 @@
     </div>
 
     <div class="search-input-group">
-      <label class="input-label">{{departureDate }}</label>
+      <label class="input-label" for="">Date</label>
       <input type="date" class="city-input" [(ngModel)]="departureDate" />
     </div>
 
@@ -72,16 +72,13 @@
             <span class="detail-label">Price</span>
             <span class="detail-value">{{ offer.price?.total }} {{ offer.price?.currency }}</span>
           </div>
-          <button mat-raised-button color="primary" (click)="selectFlight(offer)">
-            Select Flight
+          <button class="search-btn" mat-raised-button color="primary" (click)="selectFlight(offer)">
+            ✅Select Flight
           </button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Empty State -->
-  <div *ngIf="!isLoading && flightOffers.length === 0 && !error" class="empty-state">
-    <p class="empty-text">flight offers found for the given criteria.</p>
-  </div>
+
 </div>

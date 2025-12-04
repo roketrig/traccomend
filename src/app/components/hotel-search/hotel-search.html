@@ -5,13 +5,12 @@
       Continue Without Selecting a Hotel
     </button>
   </div>
-
   <div class="max-w-6xl mx-auto px-4">
     <!-- Header -->
     <div class="search-header">
-      <h1 class="search-title">🏨 Hotel Finder</h1>
-
-      <div class="search-header flex flex-col items-center gap-4 rounded-xl shadow-lg p-6 py-10 max-w-3xl mx-auto"
+      <h1 class="search-title">🏨 Hotel Reccomendation</h1>
+      <div
+        class="search-header  flex flex-col items-center gap-4 rounded-xl shadow-lg p-6 py-10 max-w-3xl mx-auto search-card"
         style="background:#f1f5f9;">
         <mat-form-field appearance="fill" class="w-full md:w-2/3">
           <mat-label>Hotel City</mat-label>
@@ -25,16 +24,11 @@
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
-
-
-        <!-- Enter Dates Butonu -->
         <button
           class="bg-gray-100 text-indigo-600 font-semibold px-5 py-3 rounded-lg shadow hover:bg-gray-200 transition"
           (click)="toggleDateInputs()">
           📅 Enter Dates
         </button>
-
-        <!-- Tarih Alanları -->
         <div *ngIf="showDateInputs" class="flex flex-col md:flex-row gap-4 w-full mt-4">
           <div class="flex flex-col w-full md:w-1/2">
             <label for="startDate" class="font-semibold text-gray-700 mb-1">Start Date</label>
@@ -48,7 +42,6 @@
           </div>
         </div>
         <div *ngIf="nightInfo !== 0">{{ nightInfo }} Night(s)</div>
-        <!-- Search Button -->
         <button
           class="bg-white text-blue-600 font-semibold px-4 py-2 rounded shadow hover:bg-blue-100 transition search-btn"
           (click)="searchHotels(); showHotelSearch = true">
@@ -56,26 +49,22 @@
         </button>
       </div>
     </div>
-
     <!-- Loading State -->
     <div *ngIf="isLoading" class="loading-container">
       <div class="loading-spinner"></div>
       <p class="loading-text">{{ cityCode }} Luxury hotels are being sought in the city...</p>
     </div>
-
     <!-- Error State -->
     <div *ngIf="error && !isLoading" class="error-container">
       <h4 class="error-title">⚠️ Error</h4>
       <p class="error-message">{{ error }}</p>
     </div>
-
     <!-- Results -->
     <div *ngIf="!isLoading && hotels.length > 0" class="results-container">
       <h3 class="results-title">
         {{ cityCode }} City Hotels Found
         <span class="results-count">{{ hotels.length }}</span>
       </h3>
-
       <!-- Hotel Grid -->
       <div class="hotels-grid">
         <div *ngFor="let h of hotels.slice(250, 265); let i = index" class="hotel-card">
@@ -88,12 +77,10 @@
               {{ h.distance?.value || 'N/A' }}
               {{ h.distance?.unit || 'N/A' }} from city center
             </p>
-            <p>📍 Address: {{ h.address.lines.join(', ') }}, {{ h.address.cityName }} {{ h.address.postalCode }}</p>
-
-            <!-- Harita -->
+            <p class="hotel-address">📍 Address: {{ h.address.lines.join(', ') }}, {{ h.address.cityName }} {{
+              h.address.postalCode }}</p>
             <app-map [latitude]="h.latitude" [longitude]="h.longitude"></app-map>
-
-            <button class="select-btn" (click)="selectHotel(h)">✅ Select Hotel</button>
+            <button class="search-btn" (click)="selectHotel(h)">✅ Select Hotel</button>
           </div>
         </div>
       </div>

@@ -72,7 +72,7 @@ svg.w-10.h-10 {
   bottom: 5%;
   right: 5%; 
   transform: translateY(-50%);
-  z-index: 1000; /* Üstte kalması için */
+  z-index: 1000; 
 }
 
 .summary-button-container button {
@@ -89,4 +89,27 @@ svg.w-10.h-10 {
   background-color: #7b1fa2;
   transform: translateY(-2px);
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.line {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 4px;
+  background: linear-gradient(to right, #ffffff, #ff9c07);
+  transition: width 0.6s ease;
+}
+
+svg.w-10.h-10 {
+  fill: #ff9c07; 
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+
+.summary-button-container button {
+  background-color: #667eea;
+}
+
+.summary-button-container button:hover {
+  background-color: #5a56d6;
 }
