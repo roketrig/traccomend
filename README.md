@@ -1,59 +1,51 @@
-# Traccomend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.4.
+# ✈️ Traccommend — Travel Recommendation App
 
-## Development server
+**Traccommend** is an Angular-based web application that helps users share a sample trip and discover **similar destination recommendations**. It features modern UI components, autocomplete for city and country selection, and optional trip details.
 
-To start a local development server, run:
+---
 
+## 🚀 Features
+- **City & Country Autocomplete** using Angular Material
+- Dynamic form fields for:
+  - Destination City
+  - Departure City
+  - Origin Country
+- Optional details:
+  - Departure & Return dates
+  - Number of adults
+- Responsive design with Tailwind CSS
+- Ready for **IATA code conversion** for flight search integration
+
+## 🧰 Tech Stack
+- Angular 17+
+- Angular Material
+- RxJS
+- Tailwind CSS
+- (Optional) Map integration (Leaflet / Google Maps)
+- (Optional) Backend API for recommendations
+
+## Gallery
+<img width="1350" height="1195" alt="hotel2" src="https://github.com/user-attachments/assets/905666fd-2f74-487d-8bbe-2af4394b41cb" />
+<img width="1350" height="1413" alt="hotel" src="https://github.com/user-attachments/assets/4b051ccc-401a-4167-b5dc-2a439516a77e" />
+<img width="1350" height="1204" alt="flightoffers2" src="https://github.com/user-attachments/assets/db2ee548-039b-4963-b671-2f5877a7107c" />
+<img width="1350" height="534" alt="travel recommendation3" src="https://github.com/user-attachments/assets/b0588397-35d4-4306-9db1-4fa0a8265480" />
+<img width="1350" height="1094" alt="travel recommendation2" src="https://github.com/user-attachments/assets/b0a68c89-1134-4045-af66-9b029744e352" />
+<img width="1350" height="1416" alt="flightoffers" src="https://github.com/user-attachments/assets/3ba17fd1-7ab6-4989-b4d1-e00aa16b1be2" />
+<img width="1350" height="1414" alt="travel recommendation" src="https://github.com/user-attachments/assets/46f6df03-6dfa-4ee9-9eab-e341ced047b8" />
+<img width="1350" height="1050" alt="pdf" src="https://github.com/user-attachments/assets/2456ed3a-67ce-4f59-8159-fd5b1c4b6ece" />
+
+## 📦 Installation
 ```bash
+# Clone the repository
+git clone https://github.com/roketrig/traccommend.git
+cd traccommend
+
+# Install dependencies
+npm install
+
+# Start development server
 ng serve
-```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+# Open in browser
+http
