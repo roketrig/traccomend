@@ -5,18 +5,7 @@
       And see what <b>other destinations</b> would you like?
     </h3>
 
-    <!-- Gidilecek Şehir -->
-    <mat-form-field appearance="fill" class="w-full">
-      <mat-label>Destination City</mat-label>
-      <input type="text" matInput [formControl]="targetCityControl" [matAutocomplete]="autoTarget"
-        placeholder="Type city name..." (focus)="scrollToBottom()">
-      <mat-autocomplete #autoTarget="matAutocomplete" [displayWith]="displayCity"
-        (optionSelected)="onTargetCitySelected($event.option.value)">
-        <mat-option class="city-input mat-option" *ngFor="let city of filteredTargetCities | async" [value]="city">
-          {{ city.city_name }}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
+
 
     <!-- Başlangıç Şehir -->
     <mat-form-field appearance="fill" class="w-full">
@@ -31,6 +20,18 @@
       </mat-autocomplete>
     </mat-form-field>
 
+        <!-- Gidilecek Şehir -->
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Destination City</mat-label>
+      <input type="text" matInput [formControl]="targetCityControl" [matAutocomplete]="autoTarget"
+        placeholder="Type city name..." (focus)="scrollToBottom()">
+      <mat-autocomplete #autoTarget="matAutocomplete" [displayWith]="displayCity"
+        (optionSelected)="onTargetCitySelected($event.option.value)">
+        <mat-option class="city-input mat-option" *ngFor="let city of filteredTargetCities | async" [value]="city">
+          {{ city.city_name }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
     <!-- Nerelisin -->
     <mat-form-field appearance="fill" class="w-full">
       <mat-label>Where are you from?</mat-label>

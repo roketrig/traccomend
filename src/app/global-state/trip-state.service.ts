@@ -29,4 +29,8 @@ export class TripStateService {
     }
   }
 
+
+   //   } else if (!storedData) {
+     // this.summaryVisibleSubject.next(false);
+
 }
