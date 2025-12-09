@@ -70,6 +70,20 @@
   margin: 0 auto 2rem;
 }
 
+.search-card-v2 {
+  background: gray;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  border: 1px solid #e2e8f0;
+  width: 90%;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  margin-bottom: 1.5rem;
+  input {
+    background: #e2e8f0;
+  }
+}
 
 /* Input */
 .search-input-group {
@@ -94,6 +108,18 @@
   text-transform: uppercase;
   transition: all 0.3s ease;
   background: white;
+}
+
+.city-input-v2 {
+  width: 100%;
+  padding: 0.9rem 1.2rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  background: rgb(169, 164, 164);
 }
 
 .city-input:focus {

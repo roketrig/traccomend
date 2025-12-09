@@ -10,6 +10,7 @@ import { SummaryModal } from '../summary-modal/summary-modal';
 import { MatDialog } from '@angular/material/dialog';
 import { TripStateService } from '../../global-state/trip-state.service';
 
+
 @Component({
   selector: 'app-flight-search',
   standalone: true,

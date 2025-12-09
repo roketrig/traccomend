@@ -21,7 +21,7 @@ import { SummaryModal } from './components/summary-modal/summary-modal';
 
   ],
   templateUrl: './app.html',
-  styleUrls: ['./app.css']
+  styleUrls: ['./app.css' , '../custom-theme.scss']
 })
 export class App {
   tabs = [

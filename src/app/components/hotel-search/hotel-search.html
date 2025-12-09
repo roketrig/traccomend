@@ -8,12 +8,13 @@
   <div class="max-w-6xl mx-auto px-4">
     <!-- Header -->
     <div class="search-header">
-      <h1 class="search-title">🏨 Hotel Reccomendation</h1>
+      <h1 class="search-title">🏨 Hotel Offers</h1>
       <div
         class="search-header  flex flex-col items-center gap-4 rounded-xl shadow-lg p-6 py-10 max-w-3xl mx-auto search-card"
         style="background:#f1f5f9;">
         <mat-form-field appearance="fill" class="w-full md:w-2/3">
           <mat-label>Hotel City</mat-label>
+          <!-- Auto Control -->
           <input type="text" matInput [formControl]="hotelCityControl" [matAutocomplete]="autoHotel"
             placeholder="Type city name..."
             class="px-4 py-3 border rounded-lg focus:outline-none focus:border-indigo-500">

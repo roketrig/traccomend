@@ -4,6 +4,7 @@
   background-size: cover;
   height: 100vh;
   align-content: center;
+  
 }
 .travel-form-container {
   width: 720px;
@@ -153,7 +154,6 @@ button[mat-button]:active {
 
 :host {
   display: block;
-  margin-top: 1rem;
 }
 
 .animated-button {
