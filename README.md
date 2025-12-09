@@ -26,7 +26,7 @@
 ---
 
 ## 🧰 Tech Stack
-- Angular 20+
+- Angular 17+
 - Angular Material
 - Tailwind CSS
 - RxJS
