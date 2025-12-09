@@ -72,7 +72,7 @@
             <span class="detail-label">Price</span>
             <span class="detail-value">{{ offer.price?.total }} {{ offer.price?.currency }}</span>
           </div>
-          <button class="search-btn" mat-raised-button color="primary" (click)="selectFlight(offer)">
+          <button class="search-btn" mat-raised-button color="primary" (click)="selectFlight(offer); continueWithoutFlight()" >
             ✅Select Flight
           </button>
         </div>

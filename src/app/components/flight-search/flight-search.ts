@@ -33,7 +33,17 @@ export class FlightSearch implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      if (params['from'] === 'result' || params['from'] === "hotels") {
+      const storedData = localStorage.getItem('travelSearchData');
+      const parsedData = storedData ? JSON.parse(storedData) : null;
+
+      // Show continue button only when a hotel is actually stored (selected/passed),
+      // or when the "from" param indicates navigation from hotel flow AND there
+      // is stored search data. This prevents showing the button on fresh visits.
+      const fromParam = params['from'];
+      const hasStoredHotel = !!(parsedData && (parsedData.selectedHotel?.selected === true || parsedData.selectedHotel?.passed === true));
+      const hasStoredSearch = !!(parsedData && (parsedData.departure_date || parsedData.target_city || parsedData.target_city_iata_code));
+
+      if (params['from'] === 'result' || params['from'] === 'hotels') {
         this.showContinueButton = true;
       }
     });
