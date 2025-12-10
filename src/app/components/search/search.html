@@ -20,7 +20,7 @@
       </mat-autocomplete>
     </mat-form-field>
 
-        <!-- Gidilecek Şehir -->
+    <!-- Gidilecek Şehir -->
     <mat-form-field appearance="fill" class="w-full">
       <mat-label>Destination City</mat-label>
       <input type="text" matInput [formControl]="targetCityControl" [matAutocomplete]="autoTarget"
@@ -32,6 +32,7 @@
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
+    
     <!-- Nerelisin -->
     <mat-form-field appearance="fill" class="w-full">
       <mat-label>Where are you from?</mat-label>
@@ -46,8 +47,6 @@
     </mat-form-field>
 
     <!-- Daha fazla detay butonu -->
-
-
     <div class="text-center">
       <button mat-button type="button" class="animated-button" [class.open]="showMoreDetails"
         (click)="showMoreDetails = !showMoreDetails">

@@ -17,16 +17,33 @@
   </div>
 
   <div class="search-card">
-    <div class="search-input-group">
-      <label class="input-label">Origin Airport Code</label>
-      <input type="text" class="city-input-v2" placeholder="e.g. SYD" [(ngModel)]="originLocationCode" readonly />
-      <p class="input-hint">Enter IATA code (e.g., IST for Istanbul)</p>
-    </div>
 
-    <div class="search-input-group">
-      <label class="input-label">Destination Airport Code</label>
-      <input type="text" class="city-input-v2" placeholder="e.g. LHR" [(ngModel)]="destinationLocationCode" readonly />
-    </div>
+    <!-- Departure City -->
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Departure City</mat-label>
+      <input type="text" matInput [formControl]="departureCityControl" [matAutocomplete]="autoDeparture"
+        placeholder="Type city name or IATA..." />
+      <mat-autocomplete #autoDeparture="matAutocomplete" [displayWith]="displayCity"
+        (optionSelected)="onDepartureCitySelectedFlight($event.option.value)">
+        <mat-option class="city-input mat-option" *ngFor="let city of filteredDepartureCities | async" [value]="city">
+          {{ city.city_name }} ({{ city.city_iata_code }})
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <!-- Destination City -->
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Destination City</mat-label>
+      <input type="text" matInput [formControl]="destinationCityControl" [matAutocomplete]="autoDestination"
+        placeholder="Type city name or IATA..."/>
+      <mat-autocomplete #autoDestination="matAutocomplete" [displayWith]="displayCity"
+        (optionSelected)="onDestinationCitySelectedFlight($event.option.value)">
+        <mat-option class="city-input mat-option" *ngFor="let city of filteredDestinationCities | async" [value]="city">
+          {{ city.city_name }} ({{ city.city_iata_code }})
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
 
     <div class="search-input-group">
       <label class="input-label" for="">Date</label>
@@ -62,17 +79,18 @@
         <div class="hotel-details">
           <div class="detail-item">
             <span class="detail-label">Origin</span>
-            <span class="detail-value">{{ offer.itineraries[0]?.segments[0]?.arrival?.iataCode }}</span>
+            <span class="detail-value">{{ offer.itineraries[0]?.segments[0]?.departure?.iataCode }}</span>
           </div>
           <div class="detail-item">
             <span class="detail-label">Destination</span>
-            <span class="detail-value">{{ offer.itineraries[0]?.segments[0]?.departure?.iataCode }}</span>
+            <span class="detail-value">{{ offer.itineraries[0]?.segments[0]?.arrival?.iataCode }}</span>
           </div>
           <div class="detail-item">
             <span class="detail-label">Price</span>
             <span class="detail-value">{{ offer.price?.total }} {{ offer.price?.currency }}</span>
           </div>
-          <button class="search-btn" mat-raised-button color="primary" (click)="selectFlight(offer); continueWithoutFlight()" >
+          <button class="search-btn" mat-raised-button color="primary"
+            (click)="selectFlight(offer);">
             ✅Select Flight
           </button>
         </div>

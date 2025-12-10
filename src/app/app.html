@@ -23,11 +23,14 @@
     </mat-tab-group>
   </header>
   <main class="w-full">
-    <div *ngIf="showSummaryButton" class="summary-button-container">
+
+    <!-- View Trip Summary -->
+    <div *ngIf="showSummaryButton && hasSummaryData" class="summary-button-container">
       <button mat-raised-button color="accent" (click)="openSummaryModal()">
         View Trip Summary
       </button>
     </div>
+
     <router-outlet></router-outlet>
   </main>
 </div>

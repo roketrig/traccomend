@@ -21,7 +21,7 @@ import { SummaryModal } from './components/summary-modal/summary-modal';
 
   ],
   templateUrl: './app.html',
-  styleUrls: ['./app.css' , '../custom-theme.scss']
+  styleUrls: ['./app.css', '../custom-theme.scss']
 })
 export class App {
   tabs = [
@@ -32,16 +32,20 @@ export class App {
 
   cityCode = '';
   showSummaryButton = false;
+  hasSummaryData = false;
 
   constructor(private router: Router, private searchService: SearchService, private tripState: TripStateService, private dialog: MatDialog) { }
+
 
   ngOnInit() {
     this.tripState.summaryVisible$.subscribe(visible => {
       this.showSummaryButton = visible;
+      this.hasSummaryData = this.tripState.hasSummaryData();
     });
-    this.tripState.checkSummaryVisibility();
-  }
 
+    this.tripState.checkSummaryVisibility();
+    this.hasSummaryData = this.tripState.hasSummaryData();
+  }
 
   openSummaryModal() {
     this.dialog.open(SummaryModal, {
@@ -54,7 +58,7 @@ export class App {
   get selectedTabIndex(): number {
     const url = this.router.url;
     const idx = this.tabs.findIndex(tab => url.startsWith(tab.route));
-    return idx >= 0 ? idx : -1; 
+    return idx >= 0 ? idx : -1;
   }
   // plane offset.
   planeX = '320px';

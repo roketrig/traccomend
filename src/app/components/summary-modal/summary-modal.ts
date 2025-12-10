@@ -7,6 +7,7 @@ import { MatCardModule } from '@angular/material/card';
 import { Router } from '@angular/router';
 import { jsPDF } from "jspdf";
 import html2pdf from 'html2pdf.js';
+import { TripStateService } from '../../global-state/trip-state.service';
 @Component({
   selector: 'app-summary-modal',
   standalone: true,
@@ -17,7 +18,7 @@ import html2pdf from 'html2pdf.js';
 export class SummaryModal implements OnInit {
   summaryData: any;
 
-  constructor(private router: Router, private dialogRef: MatDialogRef<SummaryModal>) {dialogRef.disableClose = true; }
+  constructor(private router: Router, private tripState: TripStateService, private dialogRef: MatDialogRef<SummaryModal>) {dialogRef.disableClose = true; }
 
   ngOnInit() {
     const storedData = localStorage.getItem('travelSearchData');
@@ -27,9 +28,9 @@ export class SummaryModal implements OnInit {
 
   startNewSearch() {
     localStorage.removeItem('travelSearchData'); 
+    this.tripState.checkSummaryVisibility();
     this.dialogRef.close(); 
     this.router.navigate(['/travel-recommendation']);
-    
   }
 
   @ViewChild('summaryContent') summaryContent!: ElementRef;

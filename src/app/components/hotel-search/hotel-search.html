@@ -20,7 +20,7 @@
             class="px-4 py-3 border rounded-lg focus:outline-none focus:border-indigo-500">
           <mat-autocomplete #autoHotel="matAutocomplete" [displayWith]="displayCity"
             (optionSelected)="onHotelCitySelected($event.option.value)">
-            <mat-option *ngFor="let city of filteredHotelCities | async" [value]="city">
+            <mat-option class="city-input mat-option" *ngFor="let city of filteredHotelCities | async" [value]="city">
               {{ city.city_name }}
             </mat-option>
           </mat-autocomplete>
