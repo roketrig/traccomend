@@ -22,11 +22,11 @@ export class ResultComponent implements OnInit {
       relevance: 0.71
     },
     {
-      type: 'recommended-location',
-      subtype: 'CITY',
-      name: 'MADRID',
-      iataCode: 'MAD',
-      geoCode: { longitude: 3.70348, latitude: 40.41654 },
+      type: "recommended-location",
+      subtype: "CITY",
+      name: "ISTANBUL",
+      iataCode: "IST",
+      geoCode: { "longitude": 28.9784, "latitude": 41.0082 },
       relevance: 0.68
     }
   ];
@@ -48,7 +48,7 @@ export class ResultComponent implements OnInit {
       if (city && country) {
         this.travelService.getRecommendations(city.slice(0, 3).toUpperCase(), country.toUpperCase()).subscribe({
           next: (data) => {
-            this.recommendations = data.data; 
+            this.recommendations = data.data;
           },
           error: (err) => {
             console.error('API hatası:', err);

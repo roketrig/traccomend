@@ -178,5 +178,11 @@
         "city_iata_code": "BUE",
         "country_name": "Argentina",
         "country_code": "AR"
+    },
+    {
+        "city_name": "Madrid",
+        "city_iata_code": "MAD",
+        "country_name": "Spain",
+        "country_code": "ES"
     }
 ]
