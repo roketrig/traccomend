@@ -40,8 +40,8 @@ export class FlightSearch implements OnInit {
 
   constructor(private flightService: FlightOffers, private cityService: CityService, private http: HttpClient, private router: Router, private dialog: MatDialog, private route: ActivatedRoute, private tripState: TripStateService) { }
 
-  
-ngOnInit() {
+
+  ngOnInit() {
     // 1) Query paramlar / continue butonu
     this.route.queryParams.subscribe(params => {
       const storedData = localStorage.getItem('travelSearchData');
@@ -107,7 +107,7 @@ ngOnInit() {
     });
   }
 
-private hydrateControlsFromIata() {
+  private hydrateControlsFromIata() {
     // Departure
     const depVal = this.departureCityControl.value;
     const originIata = (typeof depVal === 'string' ? depVal : depVal?.city_iata_code || this.originLocationCode || '').toUpperCase();
@@ -199,24 +199,40 @@ private hydrateControlsFromIata() {
     if (originIata) this.originLocationCode = originIata;
     if (destIata) this.destinationLocationCode = destIata;
 
+    // Validation
+    if (!this.originLocationCode || !this.destinationLocationCode) {
+      this.error = 'Please select both departure and destination cities';
+      return;
+    }
+
     this.isLoading = true;
     this.error = '';
     this.flightOffers = [];
 
-    this.flightService.searchFlightOffers(
-      this.originLocationCode,
-      this.destinationLocationCode,
-      this.departureDate,
-      this.adults
-    ).subscribe({
+    // Mock datayı flight-search.json dosyasından çek
+    this.http.get<any>('data/flight-search.json').subscribe({
       next: (res: any) => {
-        console.log('Flight API response:', res);
-        this.flightOffers = res.data || [];
+        console.log('Flight Mock Data:', res);
+        // Kullanıcının seçtiği departure ve destination city'lere göre filtrele
+        const allFlights = res.data || [];
+        this.flightOffers = allFlights.filter((offer: any) => {
+          const segments = offer.itineraries?.[0]?.segments || [];
+          return segments.some((seg: any) =>
+            seg.departure?.iataCode?.toUpperCase() === this.originLocationCode.toUpperCase() &&
+            seg.arrival?.iataCode?.toUpperCase() === this.destinationLocationCode.toUpperCase()
+          );
+        });
+
+
+        if (this.flightOffers.length === 0) {
+          this.error = 'No flights found for the selected cities';
+        }
+
         this.isLoading = false;
       },
       error: (err) => {
-        console.error('API Error:', err);
-        this.error = err.error?.errors?.[0]?.detail || 'Something went wrong';
+        console.error('Mock Data Error:', err);
+        this.error = 'Mock verisi yüklenemedi';
         this.isLoading = false;
       }
     });

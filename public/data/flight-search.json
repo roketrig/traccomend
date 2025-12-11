@@ -1,20 +1,556 @@
-[
-  {
-    "originLocationCode": "IST",
-    "destinationLocationCode": "LHR",
-    "departureDate": "11-25-2025",
-    "adults": 1
-  },
-  {
-    "originLocationCode": "CDG",
-    "destinationLocationCode": "JFK",
-    "departureDate": "12-01-2025",
-    "adults": 2
-  },
-  {
-    "originLocationCode": "FRA",
-    "destinationLocationCode": "DXB",
-    "departureDate": "12-10-2025",
-    "adults": 1
-  }
-]
+{
+  "data": [
+    {},
+    {
+      "id": "2",
+      "itineraries": [
+        {
+          "segments": [
+            {
+              "departure": {
+                "iataCode": "IST",
+                "at": "2025-11-25T15:30:00"
+              },
+              "arrival": {
+                "iataCode": "PAR",
+                "at": "2025-11-25T19:45:00"
+              },
+              "carrierCode": "BA",
+              "number": "112",
+              "aircraft": {
+                "code": "A380"
+              },
+              "class": "Y"
+            }
+          ]
+        }
+      ],
+      "price": {
+        "currency": "EUR",
+        "total": "520.00"
+      }
+    },
+    {
+      "id": "101",
+      "itineraries": [
+        {
+          "segments": [
+            {
+              "departure": {
+                "iataCode": "IST",
+                "at": "2025-11-25T08:00:00"
+              },
+              "arrival": {
+                "iataCode": "PAR",
+                "at": "2025-11-25T10:30:00"
+              },
+              "carrierCode": "TK",
+              "number": "1821",
+              "aircraft": {
+                "code": "321"
+              },
+              "class": "Y"
+            }
+          ]
+        }
+      ],
+      "price": {
+        "currency": "EUR",
+        "total": "240.00"
+      }
+    },
+    {
+      "id": "102",
+      "itineraries": [
+        {
+          "segments": [
+            {
+              "departure": {
+                "iataCode": "IST",
+                "at": "2025-11-25T12:00:00"
+              },
+              "arrival": {
+                "iataCode": "PAR",
+                "at": "2025-11-25T14:30:00"
+              },
+              "carrierCode": "AF",
+              "number": "1890",
+              "aircraft": {
+                "code": "320"
+              },
+              "class": "J"
+            }
+          ]
+        }
+      ],
+      "price": {
+        "currency": "EUR",
+        "total": "680.00"
+      }
+    },
+    {
+      "id": "103",
+      "itineraries": [
+        {
+          "segments": [
+            {
+              "departure": {
+                "iataCode": "IST",
+                "at": "2025-11-25T18:00:00"
+              },
+              "arrival": {
+                "iataCode": "PAR",
+                "at": "2025-11-25T20:30:00"
+              },
+              "carrierCode": "PC",
+              "number": "401",
+              "aircraft": {
+                "code": "737"
+              },
+              "class": "Y"
+            }
+          ]
+        }
+      ],
+      "price": {
+        "currency": "EUR",
+        "total": "180.00"
+      }
+    },
+    {
+      "id": "201",
+      "itineraries": [
+        {
+          "segments": [
+            {
+              "departure": {
+                "iataCode": "IST",
+                "at": "2025-11-26T07:00:00"
+              },
+              "arrival": {
+                "iataCode": "MAD",
+                "at": "2025-11-26T10:00:00"
+              },
+              "carrierCode": "IB",
+              "number": "340",
+              "aircraft": {
+                "code": "320"
+              },
+              "class": "Y"
+            }
+          ]
+        }
+      ],
+      "price": {
+        "currency": "EUR",
+        "total": "410.00"
+      }
+    },
+    {
+      "id": "202",
+      "itineraries": [
+        {
+          "segments": [
+            {
+              "departure": {
+                "iataCode": "IST",
+                "at": "2025-11-26T13:00:00"
+              },
+              "arrival": {
+                "iataCode": "MAD",
+                "at": "2025-11-26T16:30:00"
+              },
+              "carrierCode": "TK",
+              "number": "1850",
+              "aircraft": {
+                "code": "321"
+              },
+              "class": "J"
+            }
+          ]
+        }
+      ],
+      "price": {
+        "currency": "EUR",
+        "total": "720.00"
+      }
+    },
+    {
+      "id": "203",
+      "itineraries": [
+        {
+          "segments": [
+            {
+              "departure": {
+                "iataCode": "IST",
+                "at": "2025-11-26T20:00:00"
+              },
+              "arrival": {
+                "iataCode": "MAD",
+                "at": "2025-11-26T23:00:00"
+              },
+              "carrierCode": "UX",
+              "number": "902",
+              "aircraft": {
+                "code": "737"
+              },
+              "class": "Y"
+            }
+          ]
+        }
+      ],
+      "price": {
+        "currency": "EUR",
+        "total": "350.00"
+      }
+    },
+    {
+      "id": "301",
+      "itineraries": [
+        {
+          "segments": [
+            {
+              "departure": {
+                "iataCode": "IST",
+                "at": "2025-11-28T07:00:00"
+              },
+              "arrival": {
+                "iataCode": "NCE",
+                "at": "2025-11-28T09:30:00"
+              },
+              "carrierCode": "TK",
+              "number": "1950",
+              "aircraft": {
+                "code": "321"
+              },
+              "class": "Y"
+            }
+          ]
+        }
+      ],
+      "price": {
+        "currency": "EUR",
+        "total": "280.00"
+      }
+    },
+    {
+      "id": "302",
+      "itineraries": [
+        {
+          "segments": [
+            {
+              "departure": {
+                "iataCode": "IST",
+                "at": "2025-11-28T13:00:00"
+              },
+              "arrival": {
+                "iataCode": "NCE",
+                "at": "2025-11-28T15:30:00"
+              },
+              "carrierCode": "AF",
+              "number": "1892",
+              "aircraft": {
+                "code": "320"
+              },
+              "class": "J"
+            }
+          ]
+        }
+      ],
+      "price": {
+        "currency": "EUR",
+        "total": "620.00"
+      }
+    },
+    {
+      "id": "303",
+      "itineraries": [
+        {
+          "segments": [
+            {
+              "departure": {
+                "iataCode": "SAW",
+                "at": "2025-11-28T20:00:00"
+              },
+              "arrival": {
+                "iataCode": "NCE",
+                "at": "2025-11-28T22:30:00"
+              },
+              "carrierCode": "PC",
+              "number": "450",
+              "aircraft": {
+                "code": "737"
+              },
+              "class": "Y"
+            }
+          ]
+        }
+      ],
+      "price": {
+        "currency": "EUR",
+        "total": "210.00"
+      }
+    },
+    {
+      "id": "304",
+      "itineraries": [
+        {
+          "segments": [
+            {
+              "departure": {
+                "iataCode": "NCE",
+                "at": "2025-11-29T08:00:00"
+              },
+              "arrival": {
+                "iataCode": "IST",
+                "at": "2025-11-29T10:30:00"
+              },
+              "carrierCode": "TK",
+              "number": "1951",
+              "aircraft": {
+                "code": "321"
+              },
+              "class": "Y"
+            }
+          ]
+        }
+      ],
+      "price": {
+        "currency": "EUR",
+        "total": "290.00"
+      }
+    },
+    {
+      "id": "305",
+      "itineraries": [
+        {
+          "segments": [
+            {
+              "departure": {
+                "iataCode": "NCE",
+                "at": "2025-11-29T14:00:00"
+              },
+              "arrival": {
+                "iataCode": "IST",
+                "at": "2025-11-29T16:30:00"
+              },
+              "carrierCode": "AF",
+              "number": "1893",
+              "aircraft": {
+                "code": "320"
+              },
+              "class": "J"
+            }
+          ]
+        }
+      ],
+      "price": {
+        "currency": "EUR",
+        "total": "640.00"
+      }
+    },
+    {
+      "id": "306",
+      "itineraries": [
+        {
+          "segments": [
+            {
+              "departure": {
+                "iataCode": "NCE",
+                "at": "2025-11-29T21:00:00"
+              },
+              "arrival": {
+                "iataCode": "SAW",
+                "at": "2025-11-29T23:30:00"
+              },
+              "carrierCode": "PC",
+              "number": "451",
+              "aircraft": {
+                "code": "737"
+              },
+              "class": "Y"
+            }
+          ]
+        }
+      ],
+      "price": {
+        "currency": "EUR",
+        "total": "220.00"
+      }
+    },
+    {
+      "id": "401",
+      "itineraries": [
+        {
+          "segments": [
+            {
+              "departure": {
+                "iataCode": "PAR",
+                "at": "2025-12-01T07:00:00"
+              },
+              "arrival": {
+                "iataCode": "NCE",
+                "at": "2025-12-01T08:30:00"
+              },
+              "carrierCode": "AF",
+              "number": "620",
+              "aircraft": {
+                "code": "320"
+              },
+              "class": "Y"
+            }
+          ]
+        }
+      ],
+      "price": {
+        "currency": "EUR",
+        "total": "120.00"
+      }
+    },
+    {
+      "id": "402",
+      "itineraries": [
+        {
+          "segments": [
+            {
+              "departure": {
+                "iataCode": "CDG",
+                "at": "2025-12-01T12:00:00"
+              },
+              "arrival": {
+                "iataCode": "NCE",
+                "at": "2025-12-01T13:30:00"
+              },
+              "carrierCode": "U2",
+              "number": "450",
+              "aircraft": {
+                "code": "319"
+              },
+              "class": "Y"
+            }
+          ]
+        }
+      ],
+      "price": {
+        "currency": "EUR",
+        "total": "95.00"
+      }
+    },
+    {
+      "id": "403",
+      "itineraries": [
+        {
+          "segments": [
+            {
+              "departure": {
+                "iataCode": "ORY",
+                "at": "2025-12-01T18:00:00"
+              },
+              "arrival": {
+                "iataCode": "NCE",
+                "at": "2025-12-01T19:30:00"
+              },
+              "carrierCode": "TO",
+              "number": "710",
+              "aircraft": {
+                "code": "320"
+              },
+              "class": "J"
+            }
+          ]
+        }
+      ],
+      "price": {
+        "currency": "EUR",
+        "total": "250.00"
+      }
+    },
+    {
+      "id": "404",
+      "itineraries": [
+        {
+          "segments": [
+            {
+              "departure": {
+                "iataCode": "NCE",
+                "at": "2025-12-02T08:00:00"
+              },
+              "arrival": {
+                "iataCode": "PAR",
+                "at": "2025-12-02T09:30:00"
+              },
+              "carrierCode": "AF",
+              "number": "621",
+              "aircraft": {
+                "code": "320"
+              },
+              "class": "Y"
+            }
+          ]
+        }
+      ],
+      "price": {
+        "currency": "EUR",
+        "total": "125.00"
+      }
+    },
+    {
+      "id": "405",
+      "itineraries": [
+        {
+          "segments": [
+            {
+              "departure": {
+                "iataCode": "NCE",
+                "at": "2025-12-02T14:00:00"
+              },
+              "arrival": {
+                "iataCode": "CDG",
+                "at": "2025-12-02T15:30:00"
+              },
+              "carrierCode": "U2",
+              "number": "451",
+              "aircraft": {
+                "code": "319"
+              },
+              "class": "Y"
+            }
+          ]
+        }
+      ],
+      "price": {
+        "currency": "EUR",
+        "total": "100.00"
+      }
+    },
+    {
+      "id": "406",
+      "itineraries": [
+        {
+          "segments": [
+            {
+              "departure": {
+                "iataCode": "NCE",
+                "at": "2025-12-02T20:00:00"
+              },
+              "arrival": {
+                "iataCode": "ORY",
+                "at": "2025-12-02T21:30:00"
+              },
+              "carrierCode": "TO",
+              "number": "711",
+              "aircraft": {
+                "code": "320"
+              },
+              "class": "J"
+            }
+          ]
+        }
+      ],
+      "price": {
+        "currency": "EUR",
+        "total": "260.00"
+      }
+    }
+  ]
+}
